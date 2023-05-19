@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="63" height="60">
+    <defs>
+        <path id="a" d="M.495.526h57.777V24.17H.495z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#5ED7C6" d="M0 0v59.108h59.109V46.442h-4.222v8.444H4.222V4.222H42.22v12.666h12.667v8.445h4.222V12.666L46.442 0z"/>
+        <g transform="translate(9 20)">
+            <mask id="b" fill="#fff">
+                <use xlink:href="#a"/>
+            </mask>
+            <text fill="#572EE5" font-family="Roboto-Black, Roboto" font-size="16" font-weight="700" mask="url(#b)">
+                <tspan x="3" y="21">GIFOS</tspan>
+            </text>
+         </g>
+    </g>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="63" height="60">
+    <defs>
+        <path id="a" d="M.495.526h57.777V24.17H.495z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#5ED7C6" d="M0 0v59.108h59.109V46.442h-4.222v8.444H4.222V4.222H42.22v12.666h12.667v8.445h4.222V12.666L46.442 0z"/>
+        <g transform="translate(9 20)">
+            <mask id="b" fill="#fff">
+                <use xlink:href="#a"/>
+            </mask>
+            <text fill="#572EE5" font-family="Roboto-Black, Roboto" font-size="16" font-weight="700" mask="url(#b)">
+                <tspan x="3" y="21">GIFOS</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="63" height="60">
+    <defs>
+        <path id="a" d="M.495.526h57.777V24.17H.495z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#5ED7C6" d="M0 0v59.108h59.109V46.442h-4.222v8.444H4.222V4.222H42.22v12.666h12.667v8.445h4.222V12.666L46.442 0z"/>
+        <g transform="translate(9 20)">
+            <mask id="b" fill="#fff">
+                <use xlink:href="#a"/>
+            </mask>
+            <text fill="#572EE5" font-family="Roboto-Black, Roboto" font-size="16" font-weight="700" mask="url(#b)">
+                <tspan x="3" y="21">GIFOS</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
+
+<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="63" height="60"><!--Generator: Sketch 63.1 (92452) - https://sketch.com--><defs><path id="a" d="M.495.526h57.777V24.17H.495z"/></defs><g fill="none" fill-rule="evenodd"><path fill="#5ED7C6" d="M0 0v59.108h59.109V46.442h-4.222v8.444H4.222V4.222H42.22v12.666h12.667v8.445h4.222V12.666L46.442 0z"/><g transform="translate(9 20)"><mask id="b" fill="#fff"><use xlink:href="#a"/></mask><text fill="#572EE5" font-family="Roboto-Black, Roboto" font-size="16" font-weight="700" mask="url(#b)">
+                            <tspan x="3" y="21">GIFOS</tspan>
+                        </text></g></g></svg>

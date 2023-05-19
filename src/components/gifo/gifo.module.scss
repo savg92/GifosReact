@@ -1,0 +1,123 @@
+.root {
+    .gif {
+            min-width: 156px;
+            width: 156px;
+            height: 120px;
+            margin: 0.5rem 0.3rem 0.5rem 0.3rem;
+            // background: var(--primary_dark_background_color);
+            // background: url('https://picsum.photos/200/300');
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            // z-index: 0;
+            .gifImg {
+                position: absolute;
+                width: auto;
+                height: auto;
+                max-width: 156px;
+                max-height: 120px;
+            }
+    
+            .gifContent {
+                width: 156px;
+                height: 120px;
+                padding: 1rem;
+                display: flex;
+                flex-wrap: wrap;
+                position: relative;
+                opacity: 0;
+                box-sizing: border-box;
+                // transition: .1s ease;
+                position: absolute;
+    
+                // z-index: 2;
+                &:hover {
+                    background: var(--tertiary_font_color_transparency);
+                    opacity: 1;
+    
+                    .gifBtns {
+                        width: 100%;
+                        max-width: 243px;
+                        display: flex;
+                        justify-content: end;
+    
+                        // align-items: flex-end;
+                        // opacity: 1;
+                        .btnLike {
+                            width: 32px;
+                            height: 32px;
+                            background: var(--icon-fav);
+                            cursor: pointer;
+    
+                            &:hover {
+                                background: var(--icon-fav-hover);
+                            }
+    
+                            &:active {
+                                background: var(--icon-fav-active);
+                            }
+                        }
+    
+                        .btnLike2 {
+                            width: 32px;
+                            height: 32px;
+                            background: var(--icon-fav-active);
+                            cursor: pointer;
+    
+                            &:hover {
+                                background: var(--icon-fav-active-hover);
+                            }
+                        }
+    
+                        .btnDownload {
+                            width: 32px;
+                            height: 32px;
+                            margin: 0rem .4rem;
+                            background: var(--icon-download);
+                            cursor: pointer;
+    
+                            &:hover {
+                                background: var(--icon-download-hover);
+                            }
+                        }
+    
+                        .btnExpand {
+                            width: 32px;
+                            height: 32px;
+                            background: var(--icon-max-normal);
+                            cursor: pointer;
+    
+                            &:hover {
+                                background: var(--icon-max-normal-hover);
+                            }
+                        }
+                    }
+                }
+    
+                .gifText {
+                    display: flex;
+                    flex-direction: column;
+                    // align-content: flex-end;
+                    justify-content: flex-end;
+    
+                    // opacity: 1;
+                    p {
+                        width: fit-content;
+                    }
+    
+                    // .gifUser {
+                    //     @include gif_text_user;
+                    //     // opacity: 1;
+                    // }
+    
+                    .gifTitle {
+                        // @include gif_text_title;
+                        padding: 1rem 0rem;
+                        // opacity: 1;
+                    }
+                }
+            }
+        }
+}
