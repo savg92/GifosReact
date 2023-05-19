@@ -1,11 +1,7 @@
-import axios from "axios"
-// import dotenv from 'dotenv';
+import axios from "axios";
 
-// dotenv.config();
-
-const key: string = '';
-const baseUrl: string = 'https://api.giphy.com/v1/'
-// console.log(key)
+const key: string = import.meta.env.VITE_REACT_APP_API_KEY;
+const baseUrl: string = import.meta.env.VITE_REACT_APP_API_URL;
 
 const getTrendingGifos = async (limit: number = 20, offset: number = 0) => {
     const response = await axios.get(
