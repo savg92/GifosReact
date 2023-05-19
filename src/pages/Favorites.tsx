@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../components/layout/layout';
-import { Gifo } from '../components/gifo/gifo';
+import Gifo from '../components/gifo/gifo';
 import { getTrendingGifos } from '../services/services';
 
 const Favorites = () => {

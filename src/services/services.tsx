@@ -3,7 +3,7 @@ import axios from "axios"
 
 // dotenv.config();
 
-const key: string = 'fR97ryv0E6dG1MOKj8684haXx8ycLTiy';
+const key: string = '';
 const baseUrl: string = 'https://api.giphy.com/v1/'
 // console.log(key)
 

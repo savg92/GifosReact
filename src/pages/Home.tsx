@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Gifo } from '../components/gifo/gifo';
 import Layout from '../components/layout/layout';
+import Gifo from '../components/gifo/gifo';
+import Trending  from '../components/trending/trending';
 import { getTrendingGifos } from '../services/services';
+
 
 const Home = () => {
 
@@ -20,6 +22,7 @@ const Home = () => {
           title="title"
           username="username"
         />
+        <Trending/>
       </Layout>
     </>
   );

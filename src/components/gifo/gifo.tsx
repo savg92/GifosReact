@@ -10,7 +10,7 @@ export interface GifoProps {
   username: string;
 }
 
-export const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
+const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
@@ -34,6 +34,7 @@ export const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
           className="max-w-40 h-auto max-h-32 w-auto md:max-h-48 md:max-w-64"
           src={images.original.url}
           alt={title}
+          loading='lazy'
         ></img>
         <div className="absolute box-border flex h-32 w-40 flex-1 flex-col justify-between p-4 opacity-0 hover:bg-violet-500 hover:opacity-70 md:h-48 md:w-64">
           <div className="flex justify-end gap-1 align-top">
@@ -56,3 +57,5 @@ export const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
     </div>
   );
 };
+
+export default Gifo;
