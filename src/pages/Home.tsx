@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../components/layout/layout';
 import Gifo from '../components/gifo/gifo';
 import Trending  from '../components/trending/trending';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
 
 const Home = () => {
   return (
@@ -18,6 +20,30 @@ const Home = () => {
           title="title"
           username="username"
         />
+        <Swiper
+          // modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+          // spaceBetween={50}
+          // slidesPerView={5}
+          // navigation
+          // pagination={{ clickable: true }}
+          // mousewheel
+          // keyboard
+          // className="mySwiper"
+
+          cssMode={true}
+          navigation={true}
+          pagination={true}
+          mousewheel={true}
+          keyboard={true}
+          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+          className="mySwiper"
+        >
+          <SwiperSlide>1</SwiperSlide>
+          <SwiperSlide>2</SwiperSlide>
+          <SwiperSlide>3</SwiperSlide>
+          <SwiperSlide>4</SwiperSlide>
+          <SwiperSlide>5</SwiperSlide>
+        </Swiper>
         <Trending />
       </Layout>
     </>

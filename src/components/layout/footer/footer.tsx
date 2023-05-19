@@ -9,7 +9,7 @@ export const Footer = ({ className }: FooterProps) => {
   return (
     <div className={classNames(styles.root, className)}>
       <footer>
-        <div className="flex items-center justify-between px-20 py-4">
+        <div className="flex items-center justify-between px-20 py-4 flex-col md:flex-row">
           <ul className="flex items-center justify-between px-20 py-4">
             <li>
               <span>Compartir en:</span>

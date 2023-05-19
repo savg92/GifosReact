@@ -15,11 +15,28 @@ const trending = () => {
     };
     fetchData();
   }, []);
-return (
-  <>
-  
-  </>
-);
+  return (
+    <>
+      <div className="flex items-center justify-between bg-slate-100	">
+        <Swiper
+          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+          spaceBetween={50}
+          slidesPerView={3}
+          navigation
+          pagination={{ clickable: true }}
+          mousewheel
+          keyboard
+          className="mySwiper"
+        >
+          {data.map((item) => (
+            <SwiperSlide key={item.id}>
+              <Gifo Id={item.id} images={item.images} title={item.title} username={item.username} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    </>
+  );
 };
 
 export default trending;
