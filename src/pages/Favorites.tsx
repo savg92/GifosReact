@@ -6,46 +6,65 @@ import { getFavoriteGifos } from '../services/services';
 const Favorites = (): JSX.Element => {
   const [data, setData] = useState<any[]>([]);
   const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+  
+  const a = document.querySelector('#favContainer');
 
-  let limit: number = 20;
-
+  const limit: number = 20;
+  
   useEffect(() => {
-    // console.log(data.length);
+    console.log(data.length);
     if (favorites.length !== 0) {
       const fetchData = async () => {
         const result = await getFavoriteGifos(favorites);
         setData(result.data);
       };
       fetchData();
+      render();
     } else {
       setData(favorites);
     }
   }, [favorites]);
 
+  
+  const render = () => {
+    let limit: number = 20;
+    if (data.length > 20) {
+      limit = 20;
+    } else {
+      limit = data.length;
+    }
+    return data.slice(0, limit).map((item: any, index: number) => {
+      const { id, images, title, username } = item;
+      return <Gifo key={index} Id={id} images={images} title={title} username={username} />;
+    }
+    );
+  };
+
   const renderFavorites = () => {
-    return data
-      .slice(0, limit)
-      .map((gifo: any) => (
-        <Gifo
-          key={gifo.id}
-          Id={gifo.id}
-          images={gifo.images}
-          title={gifo.title}
-          username={gifo.username}
-        />
-      ));
+    if (data.length === 0) {
+      return (
+        <div className="flex h-96 w-full justify-center">
+          <p className="mt-8 text-center text-xl font-bold">No favorites at the moment</p>
+        </div>
+      );
+    }
+    return render();
   };
 
   const handleLoadMore = () => {
-    limit += 20;
-    // render();
-    console.log(limit);
+    let limit: number = 20;
+    if (data.length > 20) {
+      limit = 20;
+    } else {
+      limit = data.length;
+    }
+    setData(data.slice(0, limit + 20));
+  };
 
-  };
-  // create a function that init renderFavorites and handleLoadMore func
-  const render = () => {
-    renderFavorites();
-  };
+  useEffect(() => {
+    render();
+  }, [a]);
+
 
   return (
     <>
@@ -56,10 +75,15 @@ const Favorites = (): JSX.Element => {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           {data.length === 0 ? (
             <div className="flex h-96 w-full justify-center">
-              <p className="mt-8 text-center text-xl font-bold">No favorites at the moment</p>
+              <span className="noGif"></span>
+              <p className="noGifoTitle">
+                "¡Guarda tu primer GIFO en Favoritos <br></br>
+                para que se muestre aquí!"
+              </p>
             </div>
           ) : (
             <>
+              <div id="favContainer" className="flex w-full flex-wrap justify-center"></div>
               {renderFavorites()}
               {data.length > 20 && (
                 <div className="flex w-full justify-center">

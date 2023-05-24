@@ -9,7 +9,7 @@ export const Footer = ({ className }: FooterProps) => {
   return (
     <div className={classNames(styles.root, className)}>
       <footer>
-        <div className="flex items-center justify-between px-20 py-4 flex-col md:flex-row">
+        <div className="flex flex-col items-center justify-between px-20 py-4 md:flex-row">
           <ul className="flex items-center justify-between px-20 py-4">
             <li>
               <span>Compartir en:</span>
@@ -41,12 +41,13 @@ export const Footer = ({ className }: FooterProps) => {
           </ul>
           <div className="flex items-center justify-between px-1 py-4">
             <div>
-              <span className="lg:text-sm text-xl text-gray-900 hover:text-gray-700 dark:text-gray-900 dark:hover:text-gray-500">
+              <span className="text-xl text-gray-900 hover:text-gray-700 dark:text-gray-900 dark:hover:text-gray-500 lg:text-sm">
                 © GIFOS 2020 All Rights Reserved.
               </span>
             </div>
           </div>
         </div>
+        <div className="col-start-1 col-end-6 row-start-1 row-end-2 h-1 w-full bg-indigo-600 dark:bg-black"></div>
       </footer>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
+import { Navigation, Pagination, Mousewheel, Keyboard, Scrollbar, A11y } from 'swiper';
 import { useEffect, useState } from 'react';
 import Gifo from '../gifo/gifo';
 import { getTrendingGifos } from '../../services/services';
@@ -17,8 +17,13 @@ const trending = () => {
   }, []);
   return (
     <>
-      <div className="flex items-center justify-between bg-slate-100	">
+      <div className='container'>
         <Swiper
+          // modules={[Navigation, Pagination, Scrollbar, A11y]}
+          // spaceBetween={0}
+          // slidesPerView={4.1}
+          // navigation
+
           modules={[Navigation, Pagination, Mousewheel, Keyboard]}
           spaceBetween={50}
           slidesPerView={3}
@@ -28,8 +33,8 @@ const trending = () => {
           keyboard
           className="mySwiper"
         >
-          {data.map((item) => (
-            <SwiperSlide key={item.id}>
+          {data.map((item, index) => (
+            <SwiperSlide key={index}>
               <Gifo Id={item.id} images={item.images} title={item.title} username={item.username} />
             </SwiperSlide>
           ))}
