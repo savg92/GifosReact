@@ -4,12 +4,15 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 // import logo from '../../assets/logo-desktop.svg';
 import 'tailwindcss/tailwind.css';
+import { useLocation } from 'react-router-dom';
 
 export interface NavProps {
   className?: string;
 }
 
-export const Nav = ({ className }: NavProps) => {
+export const Nav = ({ className, }: NavProps) => {
+  const pathName = useLocation().pathname;
+
   const [nav, setNav] = useState(false);
 
   const showNav = () => {
@@ -70,17 +73,18 @@ export const Nav = ({ className }: NavProps) => {
                 />
               </li>
               <li>
-                <a href="/favorites" className="text-gray-800 dark:text-gray-200">
+                <a href="/favorites" className={`text-gray-800 dark:text-gray-200 ${pathName === '/favorites' ? 'underline' : ''} `}>
+                {/* // "text-gray-800 dark:text-gray-200"> */}
                   FAVORITOS
                 </a>
               </li>
               <li>
-                <a href="/misgif" className="text-gray-800 dark:text-gray-200">
+                <a href="/misgif" className={`text-gray-800 dark:text-gray-200 ${pathName === '/misgif' ? 'underline' : ''} `}>
                   MIS GIFOS
                 </a>
               </li>
               <li>
-                <a href="/newgif" className="text-gray-800 dark:text-gray-200">
+                <a href="/newgif" className={`text-gray-800 dark:text-gray-200 ${pathName === '/newgif' ? 'underline' : ''} `}>
                   +
                 </a>
               </li>

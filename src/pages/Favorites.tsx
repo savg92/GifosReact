@@ -13,7 +13,7 @@ const Favorites = (): JSX.Element => {
   const limit: number = 20;
 
   useEffect(() => {
-    console.log(data.length);
+    // console.log(data.length);
     if (favorites.length !== 0) {
       const fetchData = async () => {
         const result = await getFavoriteGifos(favorites);

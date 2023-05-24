@@ -33,7 +33,7 @@ const trending = () => {
             // loop={true}
             navigation={true}
             pagination={{ clickable: true }}
-            mousewheel={true}
+            // mousewheel={true}
             keyboard
           >
             <div>
