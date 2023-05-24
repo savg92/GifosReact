@@ -74,7 +74,7 @@ const Favorites = (): JSX.Element => {
           >
             <span className="barTrend"></span>
             <h1 className="searchedTopic">Favoritos</h1>
-            <div className="gifContainer"></div>
+            {/* <div className="gifContainer"></div> */}
             {/* <!-- <span className="moreGif"></span> -->
                     <!-- <span className="reload">dfs</span> --> */}
           </div>

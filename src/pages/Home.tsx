@@ -2,9 +2,7 @@ import Layout from '../components/layout/layout';
 import Gifo from '../components/gifo/gifo';
 import Trending from '../components/trending/trending';
 
-
-
-const Home = () => {
+const Home = ({ className }: { className: string }): JSX.Element => {
   return (
     <>
       <Layout>

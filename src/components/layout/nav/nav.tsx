@@ -135,7 +135,7 @@ export const Nav = ({ className, }: NavProps) => {
               nav ? 'right-[0px]' : 'right-[-100vw]'
             } `}
           >
-            <ul className="none items-center justify-between space-x-12 px-4 py-4 lg:flex ">
+            <ul className="none items-center justify-center align-middle ">
               <li>
                 <label htmlFor="dark-mode-toggle" className="cursor-pointer dark:text-gray-200">
                   {localStorage.getItem('DarkMode') === 'true' ? 'MODO DIURNO' : 'MODO NOCTURNO'}
@@ -148,12 +148,12 @@ export const Nav = ({ className, }: NavProps) => {
                   className="invisible"
                 />
               </li>
-              <li>
+              <li className="text-center">
                 <a href="/favorites" className="text-gray-800 dark:text-gray-200">
                   FAVORITOS
                 </a>
               </li>
-              <li>
+              <li className="text-center">
                 <a href="/misgif" className="text-gray-800 dark:text-gray-200">
                   MIS GIFOS
                 </a>
@@ -165,29 +165,3 @@ export const Nav = ({ className, }: NavProps) => {
     </>
   );
 };
-
-// ```jsx
-// import React from "react";
-// import "tailwindcss/tailwind.css";
-
-// const Button = () => {
-//   return (
-//     <button className="relative bg-transparent border-none">
-//       <span className="absolute bg-black h-2 w-20 top-10 left-0"></span>
-//       <span className="absolute bg-black h-2 w-20 top-17 left-0"></span>
-//       <span className="absolute bg-black h-2 w-20 top-24 left-0"></span>
-//       <span className="absolute text-white text-base top-15 left-26">
-//         Option 1
-//       </span>
-//       <span className="absolute text-white text-base top-25 left-26">
-//         Option 2
-//       </span>
-//       <span className="absolute text-white text-base top-35 left-26">
-//         Option 3
-//       </span>
-//     </button>
-//   );
-// };
-
-// export default Button;
-// ```;

@@ -5,9 +5,22 @@ const MyGIF = () => {
   return (
     <>
       <Layout>
-        <h1 className="text-3xl font-bold underline bg-green-500 dark:bg-red-900">
-          Hello world 3!
-        </h1>
+        <section className="contentMygifos mt-0.5">
+          <div className="flex flex-col items-center justify-center pb-8 text-xl font-bold dark:text-gray-200">
+            <span className="barTrend"></span>
+            <h1 className="searchedTopic">Mis GIFOS</h1>
+            <div className="gifContainer">
+              {/* <!-- <div className="middleContainer">
+                        <span className="noMyGifo"></span>
+                        <p className="noMyGifoTitle">
+                            ¡Anímate a crear tu primer GIFO!
+                        </p>
+                    </div> --> */}
+            </div>
+            {/* <!-- <div className="slider gifContainer"></div> --> */}
+            <span className="moreGif"></span>
+          </div>
+        </section>
         <Trending />
       </Layout>
     </>

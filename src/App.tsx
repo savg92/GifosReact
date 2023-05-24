@@ -8,7 +8,7 @@ export default function App() {
   return (
     <>
       <Routes>
-        <Route path="*" element={<Home />} />
+        <Route path="*" element={<Home className="dark:bg-gray-900" />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/misgif" element={<MisGIF />} />
         <Route path="/newgif" element={<NewGIF />} />

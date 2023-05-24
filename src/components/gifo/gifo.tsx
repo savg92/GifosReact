@@ -28,15 +28,15 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
   };
 
   return (
-    <div className={classNames(className, styles.gifo)}>
-      <div className="box-border flex h-32 w-40 items-center justify-center md:h-48 md:w-64">
+    // <div className={classNames(className, styles.gifo)}>
+      <div className=" flex h-32 w-40  justify-center md:h-48 md:w-64 mr-0">
         <img
-          className="max-w-40 h-auto max-h-32 w-auto md:max-h-48 md:max-w-64"
+          className="max-w-40 md:max-w-64 h-auto max-h-32 w-auto md:max-h-48"
           src={images.original.url}
           alt={title}
-          loading='lazy'
+          loading="lazy"
         ></img>
-        <div className="absolute box-border flex h-32 w-40 flex-1 flex-col justify-between p-4 opacity-0 hover:bg-violet-500 hover:opacity-70 md:h-48 md:w-64">
+        <div className="absolute box-border flex h-32 w-40 flex-1 flex-col justify-between p-4 opacity-0 hover:bg-violet-500 hover:opacity-90 md:h-48 md:w-64">
           <div className="flex justify-end gap-1 align-top">
             <div
               className={`h-8 w-8 cursor-pointer ${
@@ -48,13 +48,15 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
             <div className="h-8 w-8 cursor-pointer"></div>
             <div className="h-8 w-8 cursor-pointer"></div>
           </div>
-          <div className="md:max-w-48 box-border flex flex-col justify-end align-bottom">
-            <p className="gifUser max-w-48 break-all">{username!==''?username:'None'}</p>
-            <p className="gifTitle max-w-48 break-all">{title!==''?title:'None'}</p>
+          <div className="md:max-w-48 box-border flex flex-col justify-end align-bottom text-white">
+            <p className="gifUser max-w-48 break-all">
+              {username !== '' ? username : 'None'}
+            </p>
+            <p className="gifTitle max-w-48 break-all">{title !== '' ? title : 'None'}</p>
           </div>
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 
