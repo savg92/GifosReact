@@ -31,10 +31,10 @@ export const Nav = ({ className }: NavProps) => {
 
   return (
     <>
-      <header className="bg-white fixed z-10 w-full dark:bg-gray-800">
+      <header className="fixed z-10 w-full bg-white dark:bg-gray-800">
         <div className="col-start-1 col-end-6 row-start-1 row-end-2 h-1 w-full bg-indigo-600 dark:bg-black"></div>
-        <div className="flex items-center justify-between px-20 py-4">
-          <div className="flex items-center justify-between px-1 py-4">
+        <div className="flex items-center justify-between px-20 py-2">
+          <div className="flex items-center justify-between px-1 py-2">
             <div>
               <a
                 href="/"
@@ -52,7 +52,6 @@ export const Nav = ({ className }: NavProps) => {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-                {/* <img src={logo} alt="logo" /> */}
               </button>
             </div>
           </div>
@@ -91,21 +90,44 @@ export const Nav = ({ className }: NavProps) => {
           {nav ? (
             // close button
             <i
-              className="fa fa-times fixed right-[30px] z-50 text-3xl md:hidden"
+              // className="fa fa-times fixed right-[30px] z-50  md:hidden"
+              className="md:hidden"
               aria-hidden="true"
               onClick={showNav}
             >
-              X
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </i>
           ) : (
-            <i className="fa fa-bars text-3xl md:hidden" aria-hidden="true" onClick={showNav}>
-              |||
+            <i className="md:hidden" aria-hidden="true" onClick={showNav}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="h-6 w-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
             </i>
           )}
 
           {/* mobile nav */}
           <nav
-            className={`fixed top-[0px] z-40 flex h-[100vh] w-full flex-col items-center justify-around bg-indigo-600 duration-1000 dark:bg-gray-800 md:hidden mt-28 ${
+            className={`fixed top-[0px] z-40 mt-20 flex h-[100vh] w-full flex-col items-center justify-around bg-indigo-600 duration-1000 dark:bg-gray-800 md:hidden ${
               nav ? 'right-[0px]' : 'right-[-100vw]'
             } `}
           >

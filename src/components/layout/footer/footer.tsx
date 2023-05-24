@@ -8,16 +8,16 @@ export interface FooterProps {
 export const Footer = ({ className }: FooterProps) => {
   return (
     <div className={classNames(styles.root, className)}>
-      <footer>
+      <footer className="dark:bg-gray-800">
         <div className="flex flex-col items-center justify-between px-20 py-4 md:flex-row">
-          <ul className="flex items-center justify-between px-20 py-4">
+          <ul className="flex items-center justify-between px-20 py-4 dark:text-gray-200">
             <li>
               <span>Compartir en:</span>
             </li>
             <li>
               <a
                 href="#"
-                className="flex items-center px-3 py-2 text-xs font-bold uppercase leading-snug text-gray-800 hover:opacity-75"
+                className="flex items-center px-3 py-2 text-xs font-bold uppercase leading-snug text-gray-800 hover:opacity-75 dark:text-gray-200"
               >
                 <span className="ml-2">F</span>
               </a>
@@ -25,7 +25,7 @@ export const Footer = ({ className }: FooterProps) => {
             <li>
               <a
                 href="#"
-                className="flex items-center px-3 py-2 text-xs font-bold uppercase leading-snug text-gray-800 hover:opacity-75"
+                className="flex items-center px-3 py-2 text-xs font-bold uppercase leading-snug text-gray-800 hover:opacity-75 dark:text-gray-200"
               >
                 <span className="ml-2">T</span>
               </a>
@@ -33,7 +33,7 @@ export const Footer = ({ className }: FooterProps) => {
             <li>
               <a
                 href="#"
-                className="flex items-center px-3 py-2 text-xs font-bold uppercase leading-snug text-gray-800 hover:opacity-75"
+                className="flex items-center px-3 py-2 text-xs font-bold uppercase leading-snug text-gray-800 hover:opacity-75 dark:text-gray-200"
               >
                 <span className="ml-2">I</span>
               </a>
@@ -41,7 +41,7 @@ export const Footer = ({ className }: FooterProps) => {
           </ul>
           <div className="flex items-center justify-between px-1 py-4">
             <div>
-              <span className="text-xl text-gray-900 hover:text-gray-700 dark:text-gray-900 dark:hover:text-gray-500 lg:text-sm">
+              <span className="text-xl text-gray-900 hover:text-gray-700 dark:text-gray-200 lg:text-sm ">
                 © GIFOS 2020 All Rights Reserved.
               </span>
             </div>

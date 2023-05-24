@@ -10,11 +10,13 @@ export interface LayoutProps {
 
 export const Layout = ({ className, children }: LayoutProps) => {
     return (
-        <>
-            <Nav />
-            <main className={classNames('flex flex-col flex-1', className)}>{children}</main>
-            <Footer />
-        </>
+      <>
+        <Nav />
+        <main className={classNames('flex flex-1 flex-col pt-20 dark:bg-gray-800', className)}>
+          {children}
+        </main>
+        <Footer />
+      </>
     );
 };
 
