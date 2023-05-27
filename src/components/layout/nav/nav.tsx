@@ -43,7 +43,7 @@ export const Nav = ({ className, }: NavProps) => {
                 href="/"
                 className="text-xl font-bold text-gray-800 hover:text-gray-700 dark:text-white dark:hover:text-gray-300 lg:text-2xl"
               >
-                LOGO
+                GIFOS
               </a>
             </div>
             <div className="-mx-2 flex items-center justify-between px-4 py-4">

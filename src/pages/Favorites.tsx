@@ -4,6 +4,11 @@ import Gifo from '../components/gifo/gifo';
 import Trending from '../components/trending/trending';
 import { getFavoriteGifos } from '../services/services';
 
+const content = {
+  title: 'Favoritos',
+  NoFavGifo: '"¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!"',
+};
+
 const Favorites = (): JSX.Element => {
   const [data, setData] = useState<any[]>([]);
   const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
@@ -73,26 +78,27 @@ const Favorites = (): JSX.Element => {
             id="mainGifContainerFav"
           >
             <span className="barTrend"></span>
-            <h1 className="searchedTopic">Favoritos</h1>
+            <h1 className="searchedTopic">{content.title}</h1>
             {/* <div className="gifContainer"></div> */}
             {/* <!-- <span className="moreGif"></span> -->
                     <!-- <span className="reload">dfs</span> --> */}
           </div>
         </section>
-        {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4"> */}
         <div className="flex flex-wrap justify-center">
           {data.length === 0 ? (
             // <div className="col-start-2 col-end-4 flex h-96 w-full justify-center">
             <div className="flex h-96 w-full justify-center">
               <span className="noGif"></span>
-              <p className="mt-8 text-center text-xl font-bold">
-                "¡Guarda tu primer GIFO en Favoritos <br></br>
-                para que se muestre aquí!"
+              <p className="mt-8 w-96 text-center text-xl font-bold dark:text-gray-200">
+                {content.NoFavGifo}
               </p>
             </div>
           ) : (
             <>
-              <div id="favContainer" className="flex w-full flex-wrap justify-center gap-8 px-12 py-3">
+              <div
+                id="favContainer"
+                className="flex w-full flex-wrap justify-center gap-8 py-3 md:px-12"
+              >
                 {renderFavorites()}
                 {data.length > 20 && (
                   <div className="flex w-full justify-center">

@@ -10,13 +10,18 @@ const getTrendingGifos = async (limit: number = 20, offset: number = 0) => {
     return response.data
 }
 
+const trendingTopics = async () => {
+  const response = await axios.get(`${baseUrl}trending/searches?api_key=${key}`);
+  return response.data;
+};
+
 const getSearchGifos = async (query: string, limit: number = 20, offset: number = 0) => {
     const response = await axios.get(`${baseUrl}gifs/search?api_key=${key}&q=${query}&limit=${limit}&offset=${offset}`)
     return response.data
 }
 
 const getFavoriteGifos = async (ids: string[]) => {
-    const response = await axios.get(`${baseUrl}gifs?api_key=${key}&ids=${ids.join(',')}`)
+    const response = await axios.get(`${baseUrl}gifs?api_key=${key}&ids=${ids}`)
     return response.data
 }
 
@@ -31,9 +36,6 @@ const postGifo = async (file: Blob) => {
     return response.data;
 };
 
-const trendingTopics = async () => {
-    const response = await axios.get(`${baseUrl}trending/searches?api_key=${key}`)
-    return response.data
-}
+
 
 export { getTrendingGifos, getSearchGifos, getFavoriteGifos, postGifo, trendingTopics }

@@ -5,9 +5,15 @@ import styles from './gifo.module.scss';
 export interface GifoProps {
   className?: string;
   Id: string;
-  images: any;
+  images: {
+    original: {
+      url: string;
+    };
+  };
   title: string;
   username: string;
+  // isFavorite: boolean;
+  // onFavorite: (id: string, isFavorite: boolean) => void;
 }
 
 const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
@@ -16,7 +22,7 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     setIsFavorite(favorites.includes(Id));
-  }, [Id]);
+  }, [ Id ]);
 
   const handleFavorite = () => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
@@ -44,9 +50,9 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
               }`}
               id={Id}
               onClick={handleFavorite}
-            ></div>
-            <div className="h-8 w-8 cursor-pointer"></div>
-            <div className="h-8 w-8 cursor-pointer"></div>
+            >F</div>
+            <div className="h-8 w-8 cursor-pointer">D</div>
+            <div className="h-8 w-8 cursor-pointer">E</div>
           </div>
           <div className="md:max-w-48 box-border flex flex-col justify-end align-bottom text-white">
             <p className="gifUser max-w-48 break-all">
