@@ -7,10 +7,10 @@ import { useEffect, useState } from 'react';
 
 const Home = ({ className }: { className: string }): JSX.Element => {
   const [dataTrending, setDataTrending] = useState<any[]>([]);
-  const [dataSearch, setDataSearch] = useState<any[]>();
+  const [dataSearch, setDataSearch] = useState<any[]>([]);
   const [topic, setTopic] = useState<string>('');
   const [offset, setOffset] = useState<number>(0);
-  const [limit, setLimit] = useState<number>(20);
+  const [limit, setLimit] = useState<number>(12);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +22,15 @@ const Home = ({ className }: { className: string }): JSX.Element => {
 
   // console.log(dataTrending);
 
-
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getSearchGifos(`${topic}`, limit, offset);
+      setDataSearch(result.data);
+    };
+    fetchData();
+  }
+  , [topic, limit, offset]);
+  
   //handle search from a trending topic
   const handleSearch = async (topic: string) => {
     setTopic(topic);
@@ -30,7 +38,7 @@ const Home = ({ className }: { className: string }): JSX.Element => {
     setDataSearch(result.data);
     // console.log(result.data);
   };
- 
+
   // render first 5 trending topics in the home page, including the comma and a blanck space at the end of each topic except the last one
   const renderTrending = () => {
     // function to UpperCase the first letter of the string
@@ -47,6 +55,22 @@ const Home = ({ className }: { className: string }): JSX.Element => {
         </span>
       );
     });
+  };
+
+  const handleLoadMore = () => {
+    setLimit(limit + 12);
+  };
+
+  const renderLoadMore = () => {
+    if (dataSearch.length > limit-1) {
+      return (
+        <div className="loadMore">
+          <button className="btn btnLoadMore dark:text-gray-200" onClick={handleLoadMore}>
+            Ver más
+          </button>
+        </div>
+      );
+    }
   };
 
   return (
@@ -78,6 +102,7 @@ const Home = ({ className }: { className: string }): JSX.Element => {
                   onClick={() => {
                     setTopic('');
                     setDataSearch([]);
+                    setLimit(12);
                   }}
                 >
                   x
@@ -98,6 +123,7 @@ const Home = ({ className }: { className: string }): JSX.Element => {
           ) : (
             <span></span>
           )}
+          <div className="flex flex-col items-center justify-center py-10">{renderLoadMore()}</div>
         </section>
         <Trending />
       </Layout>

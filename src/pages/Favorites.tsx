@@ -16,8 +16,6 @@ const Favorites = (): JSX.Element => {
   const [limit, setLimit] = useState<number>(12);
   const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
-  console.log(data);
-
   useEffect(() => {
     const fetchData = async () => {
       const result = await getFavoriteGifos(favorites);
@@ -57,7 +55,7 @@ const Favorites = (): JSX.Element => {
     <>
       <Layout>
         {renderGifos()}
-        <div className='flex flex-col items-center justify-center'>
+        <div className='flex flex-col items-center justify-center py-10'>
           {renderLoadMore()}
         </div>
         <Trending />
