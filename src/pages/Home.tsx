@@ -29,7 +29,7 @@ const Home = ({ className }: { className: string }): JSX.Element => {
     };
     fetchData();
   }
-  , [topic, limit, offset]);
+  , [limit, offset]);
   
   //handle search from a trending topic
   const handleSearch = async (topic: string) => {
@@ -114,7 +114,7 @@ const Home = ({ className }: { className: string }): JSX.Element => {
             <h3 className="text-xl font-bold dark:text-gray-200">Trending:</h3>
             <p className="dark:text-gray-200">{renderTrending()}</p>
           </div>
-          {topic !== '' ? (
+          {dataSearch.length !== 0 ? (
             <LayoutContainer
               section={topic}
               dataValue={dataSearch}
