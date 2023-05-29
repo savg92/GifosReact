@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../components/layout/layout';
 import Gifo from '../components/gifo/gifo';
 import Trending from '../components/trending/trending';
+import LayoutContainer from '../components/layoutContainer/layoutContainer';
 import { getFavoriteGifos } from '../services/services';
+import { title } from 'process';
 
 const content = {
   title: 'Favoritos',
@@ -11,11 +13,10 @@ const content = {
 
 const Favorites = (): JSX.Element => {
   const [data, setData] = useState<any[]>([]);
+  const [limit, setLimit] = useState<number>(20);
   const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
   const a = document.querySelector('#favContainer');
-
-  const limit: number = 20;
 
   useEffect(() => {
     // console.log(data.length);
@@ -72,7 +73,7 @@ const Favorites = (): JSX.Element => {
   return (
     <>
       <Layout>
-        <section className="contentFavourites mt-0.5">
+        {/* <section className="contentFavourites mt-0.5">
           <div
             className="flex flex-col items-center justify-center pb-8 text-xl font-bold dark:text-gray-200"
             id="mainGifContainerFav"
@@ -82,9 +83,9 @@ const Favorites = (): JSX.Element => {
             {/* <div className="gifContainer"></div> */}
             {/* <!-- <span className="moreGif"></span> -->
                     <!-- <span className="reload">dfs</span> --> */}
-          </div>
-        </section>
-        <div className="flex flex-wrap justify-center">
+          {/* </div>
+        </section> */}
+        {/* <div className="flex flex-wrap justify-center">
           {data.length === 0 ? (
             // <div className="col-start-2 col-end-4 flex h-96 w-full justify-center">
             <div className="flex h-96 w-full justify-center">
@@ -113,7 +114,8 @@ const Favorites = (): JSX.Element => {
               </div>
             </>
           )}
-        </div>
+        </div> */}
+        <LayoutContainer section={content.title} dataValue={data} noDataText={content.NoFavGifo} />
         <Trending />
       </Layout>
     </>

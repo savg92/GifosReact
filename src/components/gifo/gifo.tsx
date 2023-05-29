@@ -58,7 +58,7 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
             <p className="gifUser max-w-48 break-all">
               {username !== '' ? username : 'None'}
             </p>
-            <p className="gifTitle max-w-48 break-all">{title !== '' ? title : 'None'}</p>
+            <p className="gifTitle max-w-48 break-all font-bold">{title !== '' ? title : 'None'}</p>
           </div>
         </div>
       </div>

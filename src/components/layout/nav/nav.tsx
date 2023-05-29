@@ -14,6 +14,7 @@ export const Nav = ({ className, }: NavProps) => {
   const pathName = useLocation().pathname;
 
   const [nav, setNav] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const showNav = () => {
     setNav(!nav);
@@ -28,6 +29,7 @@ export const Nav = ({ className, }: NavProps) => {
   const handleToggle = () => {
     const isDarkMode = localStorage.getItem('DarkMode') === 'true';
     const newIsDarkMode = !isDarkMode;
+    setDarkMode(newIsDarkMode);
     localStorage.setItem('DarkMode', String(newIsDarkMode));
     document.documentElement.classList.toggle('dark', newIsDarkMode);
   };
@@ -62,7 +64,8 @@ export const Nav = ({ className, }: NavProps) => {
             <ul className="none items-center justify-between space-x-12 px-4 py-4 lg:flex ">
               <li>
                 <label htmlFor="dark-mode-toggle" className="cursor-pointer dark:text-gray-200">
-                  {localStorage.getItem('DarkMode') === 'true' ? 'MODO DIURNO' : 'MODO NOCTURNO'}
+                  {/* {localStorage.getItem('DarkMode') === 'true' ? 'MODO DIURNO' : 'MODO NOCTURNO'} */}
+                  {darkMode ? 'MODO DIURNO' : 'MODO NOCTURNO'}
                 </label>
                 <input
                   type="checkbox"
@@ -73,18 +76,33 @@ export const Nav = ({ className, }: NavProps) => {
                 />
               </li>
               <li>
-                <a href="/favorites" className={`text-gray-800 dark:text-gray-200 ${pathName === '/favorites' ? 'underline' : ''} `}>
-                {/* // "text-gray-800 dark:text-gray-200"> */}
+                <a
+                  href="/favorites"
+                  className={`text-gray-800 dark:text-gray-200 ${
+                    pathName === '/favorites' ? 'underline' : ''
+                  } `}
+                >
+                  {/* // "text-gray-800 dark:text-gray-200"> */}
                   FAVORITOS
                 </a>
               </li>
               <li>
-                <a href="/misgif" className={`text-gray-800 dark:text-gray-200 ${pathName === '/misgif' ? 'underline' : ''} `}>
+                <a
+                  href="/misgif"
+                  className={`text-gray-800 dark:text-gray-200 ${
+                    pathName === '/misgif' ? 'underline' : ''
+                  } `}
+                >
                   MIS GIFOS
                 </a>
               </li>
               <li>
-                <a href="/newgif" className={`text-gray-800 dark:text-gray-200 ${pathName === '/newgif' ? 'underline' : ''} `}>
+                <a
+                  href="/newgif"
+                  className={`text-gray-800 dark:text-gray-200 ${
+                    pathName === '/newgif' ? 'underline' : ''
+                  } `}
+                >
                   +
                 </a>
               </li>
@@ -112,20 +130,20 @@ export const Nav = ({ className, }: NavProps) => {
             </i>
           ) : (
             <i className="md:hidden" aria-hidden="true" onClick={showNav}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                  />
-                </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
             </i>
           )}
 
@@ -138,7 +156,8 @@ export const Nav = ({ className, }: NavProps) => {
             <ul className="none items-center justify-center align-middle ">
               <li>
                 <label htmlFor="dark-mode-toggle" className="cursor-pointer dark:text-gray-200">
-                  {localStorage.getItem('DarkMode') === 'true' ? 'MODO DIURNO' : 'MODO NOCTURNO'}
+                  {/* {localStorage.getItem('DarkMode') === 'true' ? 'MODO DIURNO' : 'MODO NOCTURNO'} */}
+                  {darkMode ? 'MODO DIURNO' : 'MODO NOCTURNO'}
                 </label>
                 <input
                   type="checkbox"
