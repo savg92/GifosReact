@@ -3,6 +3,7 @@ import Layout from '../components/layout/layout';
 import Trending from '../components/trending/trending';
 import LayoutContainer from '../components/layoutContainer/layoutContainer';
 import { getFavoriteGifos } from '../services/services';
+import Modal from '../components/modal/modal';
 
 const content = {
   title: 'Favoritos',
@@ -52,6 +53,7 @@ const Favorites = (): JSX.Element => {
   return (
     <>
       <Layout>
+        <Modal data={data.toString()} />
         {renderGifos()}
         <div className='flex flex-col items-center justify-center py-10'>
           {renderLoadMore()}

@@ -25,7 +25,7 @@ const getFavoriteGifos = async (ids: string[]) => {
     return response.data
 }
 
-const postGifo = async (file: Blob) => {
+const createGifo = async (file: Blob) => {
     if (!file) {
         throw new Error('File is undefined or null');
     }
@@ -38,4 +38,4 @@ const postGifo = async (file: Blob) => {
 
 
 
-export { getTrendingGifos, getSearchGifos, getFavoriteGifos, postGifo, trendingTopics }
+export { getTrendingGifos, getSearchGifos, getFavoriteGifos, createGifo, trendingTopics }
