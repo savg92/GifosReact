@@ -28,7 +28,7 @@ const Home = ({ className }: { className: string }): JSX.Element => {
     setTopic(topic);
     const result = await getSearchGifos(`${topic}`, limit, offset);
     setDataSearch(result.data);
-    console.log(result.data);
+    // console.log(result.data);
   };
  
   // render first 5 trending topics in the home page, including the comma and a blanck space at the end of each topic except the last one
@@ -63,32 +63,41 @@ const Home = ({ className }: { className: string }): JSX.Element => {
                 type="text"
                 className="searchInput"
                 placeholder="Busca GIFOS y más"
-                onChange=
-                {(e) => handleSearch(e.target.value)}
-                // {(e) => console.log(e.target.value)}
-                // {(e) => {
-                //   {topic === '' ? setTopic(e.target.value) : setTopic(topic)}
-                // }}
+                // onChange={(e) => handleSearch(e.target.value)}
+                onChange={(e) => setTopic(e.target.value)}
                 value={topic}
               />
-              
+              <button className="searchBtn" type="submit">
+                <div className="searchIcon" onClick={(e) => handleSearch(topic)}>
+                  s
+                </div>
+              </button>
+              <button className="searchCloseBtn">
+                <div
+                  className="searchCloseIcon"
+                  onClick={() => {
+                    setTopic('');
+                    setDataSearch([]);
+                  }}
+                >
+                  x
+                </div>
+              </button>
             </div>
           </div>
           <div className="trendingTopic text-center">
             <h3 className="text-xl font-bold dark:text-gray-200">Trending:</h3>
             <p className="dark:text-gray-200">{renderTrending()}</p>
           </div>
-          {/* <div className="mainGifContainer">
-            <span className="barTrend"></span>
-            <h2 className="searchedTopic">Mascotas</h2>
-            <div className="slider gifContainer"></div>
-            <span className="moreGif"></span>
-          </div> */}
-          <LayoutContainer
-            section={topic}
-            dataValue={dataSearch}
-            noDataText="Intenta con otra búsqueda."
-          />
+          {topic !== '' ? (
+            <LayoutContainer
+              section={topic}
+              dataValue={dataSearch}
+              noDataText="Intenta con otra búsqueda."
+            />
+          ) : (
+            <span></span>
+          )}
         </section>
         <Trending />
       </Layout>
