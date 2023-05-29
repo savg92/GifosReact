@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import Layout from '../components/layout/layout';
-import Gifo from '../components/gifo/gifo';
 import Trending from '../components/trending/trending';
 import LayoutContainer from '../components/layoutContainer/layoutContainer';
 import { getFavoriteGifos } from '../services/services';
-import { title } from 'process';
 
 const content = {
   title: 'Favoritos',
