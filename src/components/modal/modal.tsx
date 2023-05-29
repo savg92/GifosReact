@@ -97,14 +97,14 @@ const Modal = ({data}:any) => {
                         />
                       </SwiperSlide>
                     ))} */}
-                    <SwiperSlide className="">
+                    {/* <SwiperSlide className="">
                         <img
                             // src={item.images.original.url}
                             src="https://picsum.photos/200/300"
                             alt="item.title"
                             className="h-64 w-64 object-cover"
                         />
-                    </SwiperSlide>
+                    </SwiperSlide> */}
                   </Swiper>
                 </div>
                 {/* <div className="flex items-center justify-between p-6">
