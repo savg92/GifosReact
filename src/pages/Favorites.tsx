@@ -53,7 +53,7 @@ const Favorites = (): JSX.Element => {
   return (
     <>
       <Layout>
-        <Modal data={data.toString()} />
+        <Modal data={{data}} />
         {renderGifos()}
         <div className='flex flex-col items-center justify-center py-10'>
           {renderLoadMore()}

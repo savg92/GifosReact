@@ -38,7 +38,7 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
     // <div className={classNames(className, styles.gifo)}>
     <div className=" mr-0 flex h-32  w-40 justify-center md:h-48 md:w-64">
       <img
-        className="max-w-40 md:max-w-64 h-auto max-h-32 w-auto md:max-h-48"
+        className="max-w-40 md:max-w-64 h-auto  w-auto md:max-h-48"
         src={images.original.url}
         alt={title}
         loading="lazy"

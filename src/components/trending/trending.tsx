@@ -61,7 +61,7 @@ const trending = () => {
             // injectStyles=[{ display: 'flex' }]
           >
             {data.map((item, index) => (
-              <SwiperSlide key={index} className="w-max">
+              <SwiperSlide key={index} className="w-max md:pl-10 ">
                 <Gifo
                   Id={item.id}
                   images={item.images}

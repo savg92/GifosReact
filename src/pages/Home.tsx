@@ -47,7 +47,7 @@ const Home = ({ className }: { className: string }): JSX.Element => {
     };
     return dataTrending.slice(0, 5).map((item: any, index: number) => {
       return (
-        <span key={index} className="trendingTopicItem">
+        <span key={index} className="trendingTopicItem cursor-pointer">
           <span className="hover:underline" onClick={() => handleSearch(toUpperCase(item))}>
             {toUpperCase(item)}
           </span>
