@@ -87,9 +87,9 @@ const Home = ({ className }: { className: string }): JSX.Element => {
                 type="text"
                 className="searchInput"
                 placeholder="Busca GIFOS y más"
-                // onChange={(e) => handleSearch(e.target.value)}
-                onChange={(e) => setTopic(e.target.value)}
                 value={topic}
+                onChange={(e) => setTopic(e.target.value)}
+                onKeyDown={(e) => (e.key === 'Enter' ? handleSearch(topic) : '')}
               />
               <button className="searchBtn" type="submit">
                 <div className="searchIcon" onClick={(e) => handleSearch(topic)}>
