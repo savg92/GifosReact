@@ -35,7 +35,6 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
   };
 
   return (
-    // <div className={classNames(className, styles.gifo)}>
     <div className=" mr-0 flex h-32  w-40 justify-center md:h-48 md:w-64">
       <img
         className="max-w-40 md:max-w-64 h-auto  w-auto md:max-h-48"
