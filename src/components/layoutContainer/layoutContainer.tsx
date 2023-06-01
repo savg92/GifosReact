@@ -26,10 +26,8 @@ const layoutContainer = ({
           className="flex flex-col items-center justify-center pb-8 text-xl font-bold dark:text-gray-200"
           id="mainGifContainerFav"
         >
-          <div
-            className={`barTrend w-48 py-4 ${topBarColor}`}
-          ></div>
-          <h1 className="searchedTopic text-violet-700">{section}</h1>
+          <div className={`barTrend w-48 py-4 ${topBarColor}`}></div>
+          <h1 className="searchedTopic text-violet-700 dark:text-gray-200">{section}</h1>
         </div>
         <div className="flex flex-wrap justify-center">
           {dataValue && dataValue.length === 0 ? (

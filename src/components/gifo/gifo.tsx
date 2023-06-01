@@ -46,12 +46,13 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
             className={`h-8 w-8 cursor-pointer ${isFavorite ? 'btnLike bg-gray-700' : 'btnLike2'}`}
             id={Id}
             onClick={handleFavorite}
+            title='Add to favorites'
           >
             F
           </div>
-          <div className="h-8 w-8 cursor-pointer" onClick={() => blobDwnld(images.original.url, title)}
+          <div className="h-8 w-8 cursor-pointer" title='Descargar' onClick={() => blobDwnld(images.original.url, title)}
           >D</div>
-          <div className="h-8 w-8 cursor-pointer">E</div>
+          <div className="h-8 w-8 cursor-pointer" title='Expandir'>E</div>
         </div>
         <div className="md:max-w-48 box-border flex flex-col justify-end align-bottom text-white">
           <p className="gifUser max-w-48 break-all">{username !== '' ? username : 'None'}</p>

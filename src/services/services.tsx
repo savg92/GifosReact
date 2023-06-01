@@ -41,4 +41,11 @@ const autoSuggest = async (query: string) => {
     return response.data
 }
 
-export { getTrendingGifos, getSearchGifos, getFavoriteGifos, createGifo, trendingTopics }
+export {
+  getTrendingGifos,
+  getSearchGifos,
+  getFavoriteGifos,
+  createGifo,
+  trendingTopics,
+  autoSuggest,
+};

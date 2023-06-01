@@ -81,8 +81,10 @@ export const Nav = ({ className, }: NavProps) => {
               <li>
                 <a
                   href="/favorites"
-                  className={`font-bold  hover:underline hover:decoration-green-400 dark:text-gray-200 ${
-                    pathName === '/favorites' ? 'text-gray-500' : 'text-violet-700'
+                  className={`font-bold  hover:underline hover:decoration-green-400  ${
+                    pathName === '/favorites'
+                      ? 'text-gray-400'
+                      : 'text-violet-700 dark:text-gray-200'
                   } `}
                 >
                   FAVORITOS
@@ -91,8 +93,8 @@ export const Nav = ({ className, }: NavProps) => {
               <li>
                 <a
                   href="/misgif"
-                  className={`font-bold text-violet-700 hover:underline hover:decoration-green-400 dark:text-gray-200 ${
-                    pathName === '/misgif' ? 'text-gray-500' : 'text-violet-700'
+                  className={`font-bold  hover:underline hover:decoration-green-400 ${
+                    pathName === '/misgif' ? 'text-gray-400' : 'text-violet-700 dark:text-gray-200'
                   } `}
                 >
                   MIS GIFOS
@@ -101,10 +103,10 @@ export const Nav = ({ className, }: NavProps) => {
               <li>
                 <a
                   href="/newgif"
-                  className={`rounded-full border-2 border-solid text-gray-800 dark:text-gray-200 ${
+                  className={`rounded-full border-2 border-solid  ${
                     pathName === '/newgif'
-                      ? 'border-gray-500 text-gray-500'
-                      : 'border-violet-500 text-violet-700'
+                      ? 'border-gray-400 text-gray-400'
+                      : 'border-violet-700 text-violet-700 dark:border-gray-200 dark:text-gray-200'
                   } `}
                 >
                   +
@@ -127,7 +129,7 @@ export const Nav = ({ className, }: NavProps) => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-6 w-6 font-bold text-violet-700"
+                className="h-6 w-6 font-bold text-violet-700 dark:text-gray-200"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -140,7 +142,7 @@ export const Nav = ({ className, }: NavProps) => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-6 w-6 font-bold text-violet-700"
+                className="h-6 w-6 font-bold text-violet-700 dark:text-gray-200"
               >
                 <path
                   strokeLinecap="round"
