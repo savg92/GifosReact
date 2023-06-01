@@ -6,23 +6,30 @@ interface LayoutContainerProps {
   section?: string;
   dataValue?: string[];
   noDataText?: string;
+  topBarColor?: string;
 }
 
 {
   /* <Gifo key={index} Id={id} images={images} title={title} username={username} />; */
 }
 
-const layoutContainer = ({ section, dataValue, noDataText }: LayoutContainerProps): JSX.Element => {
-
+const layoutContainer = ({
+  section,
+  dataValue,
+  noDataText,
+  topBarColor,
+}: LayoutContainerProps): JSX.Element => {
   return (
     <>
-      <section className="contentFavourites mt-0.5">
+      <section className="contentFavourites mt-4">
         <div
           className="flex flex-col items-center justify-center pb-8 text-xl font-bold dark:text-gray-200"
           id="mainGifContainerFav"
         >
-          <span className="barTrend"></span>
-          <h1 className="searchedTopic">{section}</h1>
+          <div
+            className={`barTrend w-48 py-4 ${topBarColor}`}
+          ></div>
+          <h1 className="searchedTopic text-violet-700">{section}</h1>
         </div>
         <div className="flex flex-wrap justify-center">
           {dataValue && dataValue.length === 0 ? (

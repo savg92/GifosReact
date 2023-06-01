@@ -13,8 +13,6 @@ export interface GifoProps {
   };
   title: string;
   username: string;
-  // isFavorite: boolean;
-  // onFavorite: (id: string, isFavorite: boolean) => void;
 }
 
 const Gifo = ({ className, Id, images, title, username }: GifoProps) => {

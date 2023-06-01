@@ -47,7 +47,10 @@ const Home = ({ className }: { className: string }): JSX.Element => {
     };
     return dataTrending.slice(0, 5).map((item: any, index: number) => {
       return (
-        <span key={index} className="trendingTopicItem cursor-pointer">
+        <span
+          key={index}
+          className="trendingTopicItem cursor-pointer text-violet-700 dark:text-gray-200"
+        >
           <span className="hover:underline" onClick={() => handleSearch(toUpperCase(item))}>
             {toUpperCase(item)}
           </span>
@@ -77,15 +80,16 @@ const Home = ({ className }: { className: string }): JSX.Element => {
     <>
       <Layout>
         <section className="content mt-0.5 flex flex-col items-center justify-center">
-          <h1 className="text-xl font-bold dark:text-gray-200">
-            Inspírate, busca, guarda, y crea los mejores <span>GIFOS</span>
+          <h1 className="w-56 text-center text-xl font-bold text-violet-700  dark:text-gray-200 md:w-80">
+            Inspírate, busca, guarda, y crea los mejores{' '}
+            <span className="text-green-400">GIFOS</span>
           </h1>
           <div className="searchArea">
             <div className="searchBlockImg"></div>
-            <div className="searchBar">
+            <div className="searchBar flex items-center justify-between rounded-full border-2 border-solid border-violet-500 px-16 py-3 dark:border-gray-200 ">
               <input
                 type="text"
-                className="searchInput"
+                className="searchInput w-full border-0 border-solid outline-none dark:bg-gray-800 dark:text-gray-200"
                 placeholder="Busca GIFOS y más"
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
@@ -111,7 +115,7 @@ const Home = ({ className }: { className: string }): JSX.Element => {
             </div>
           </div>
           <div className="trendingTopic text-center">
-            <h3 className="text-xl font-bold dark:text-gray-200">Trending:</h3>
+            <h3 className="text-xl font-bold text-violet-700 dark:text-gray-200">Trending:</h3>
             <p className="dark:text-gray-200">{renderTrending()}</p>
           </div>
           {dataSearch.length !== 0 ? (
@@ -119,6 +123,7 @@ const Home = ({ className }: { className: string }): JSX.Element => {
               section={topic}
               dataValue={dataSearch}
               noDataText="Intenta con otra búsqueda."
+              topBarColor="border-t-2 border-solid border-gray-200"
             />
           ) : (
             <span></span>

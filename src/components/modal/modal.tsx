@@ -6,9 +6,13 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
-const Modal = ( data: any, index: number = 0) => {
+const Modal = ({ data }: any, index: number = 0) => {
   // console.log(data.data);
   const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    setShowModal(!showModal);
+  };
 
   return (
     <>

@@ -36,6 +36,9 @@ const createGifo = async (file: Blob) => {
     return response.data;
 };
 
-
+const autoSuggest = async (query: string) => {
+    const response = await axios.get(`${baseUrl}gifs/search/tags?api_key=${key}&q=${query}`)
+    return response.data
+}
 
 export { getTrendingGifos, getSearchGifos, getFavoriteGifos, createGifo, trendingTopics }

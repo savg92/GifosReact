@@ -21,7 +21,9 @@ const trending = () => {
     <>
       <section className="bg-slate-100 p-8 dark:bg-gray-900 md:p-16">
         <div className="flex flex-col items-center justify-center pb-8 dark:text-gray-200">
-          <p className="trendingTitle">Trending GIFOS</p>
+          <h2 className="trendingTitle text-xl font-bold text-violet-700 dark:text-gray-200">
+            Trending GIFOS
+          </h2>
           <p className="trendingText text-center">Mira los últimos GIFOS de nuestra comunidad.</p>
         </div>
         <div className="justify-center md:flex md:px-10 md:py-10">

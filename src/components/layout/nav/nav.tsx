@@ -43,7 +43,7 @@ export const Nav = ({ className, }: NavProps) => {
             <div>
               <a
                 href="/"
-                className="text-xl font-bold text-gray-800 hover:text-gray-700 dark:text-white dark:hover:text-gray-300 lg:text-2xl"
+                className="text-xl font-bold text-violet-700 hover:text-gray-700 dark:text-white dark:hover:text-gray-300 lg:text-2xl"
               >
                 GIFOS
               </a>
@@ -63,7 +63,10 @@ export const Nav = ({ className, }: NavProps) => {
           <nav className="hidden md:flex">
             <ul className="none items-center justify-between space-x-12 px-4 py-4 lg:flex ">
               <li>
-                <label htmlFor="dark-mode-toggle" className="cursor-pointer dark:text-gray-200">
+                <label
+                  htmlFor="dark-mode-toggle"
+                  className="cursor-pointer font-bold text-violet-700 hover:underline hover:decoration-green-400 dark:text-gray-200"
+                >
                   {/* {localStorage.getItem('DarkMode') === 'true' ? 'MODO DIURNO' : 'MODO NOCTURNO'} */}
                   {darkMode ? 'MODO DIURNO' : 'MODO NOCTURNO'}
                 </label>
@@ -78,19 +81,18 @@ export const Nav = ({ className, }: NavProps) => {
               <li>
                 <a
                   href="/favorites"
-                  className={`text-gray-800 dark:text-gray-200 ${
-                    pathName === '/favorites' ? 'underline' : ''
+                  className={`font-bold  hover:underline hover:decoration-green-400 dark:text-gray-200 ${
+                    pathName === '/favorites' ? 'text-gray-500' : 'text-violet-700'
                   } `}
                 >
-                  {/* // "text-gray-800 dark:text-gray-200"> */}
                   FAVORITOS
                 </a>
               </li>
               <li>
                 <a
                   href="/misgif"
-                  className={`text-gray-800 dark:text-gray-200 ${
-                    pathName === '/misgif' ? 'underline' : ''
+                  className={`font-bold text-violet-700 hover:underline hover:decoration-green-400 dark:text-gray-200 ${
+                    pathName === '/misgif' ? 'text-gray-500' : 'text-violet-700'
                   } `}
                 >
                   MIS GIFOS
@@ -99,8 +101,10 @@ export const Nav = ({ className, }: NavProps) => {
               <li>
                 <a
                   href="/newgif"
-                  className={`text-gray-800 dark:text-gray-200 ${
-                    pathName === '/newgif' ? 'underline' : ''
+                  className={`rounded-full border-2 border-solid text-gray-800 dark:text-gray-200 ${
+                    pathName === '/newgif'
+                      ? 'border-gray-500 text-gray-500'
+                      : 'border-violet-500 text-violet-700'
                   } `}
                 >
                   +
@@ -123,7 +127,7 @@ export const Nav = ({ className, }: NavProps) => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-6 w-6"
+                className="h-6 w-6 font-bold text-violet-700"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
@@ -136,7 +140,7 @@ export const Nav = ({ className, }: NavProps) => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-6 w-6"
+                className="h-6 w-6 font-bold text-violet-700"
               >
                 <path
                   strokeLinecap="round"
