@@ -33,7 +33,7 @@ const layoutContainer = ({
           {dataValue && dataValue.length === 0 ? (
             <div className="flex h-96 w-full justify-center">
               <span className="noGif"></span>
-              <p className="mt-8 w-96 text-center text-xl font-bold dark:text-gray-200">
+              <p className="mt-8 w-96 text-center text-xl font-bold text-green-400 dark:text-gray-200">
                 {noDataText}
               </p>
             </div>

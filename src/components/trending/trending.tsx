@@ -60,7 +60,6 @@ const trending = () => {
                 spaceBetween: 5,
               },
             }}
-            // injectStyles=[{ display: 'flex' }]
           >
             {data.map((item, index) => (
               <SwiperSlide key={index} className="w-max md:pl-10 ">

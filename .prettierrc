@@ -6,10 +6,10 @@
       "files": ["*.js", "*.cjs", "*.mjs", "*.ts", "*.tsx", "*.cts", "*.mts"],
       "options": {
         "tabWidth": 2,
+        "bracketSpacing": true,
         "singleQuote": true,
         "semi": true,
         "trailingComma": "es5",
-        "bracketSpacing": true,
         "bracketSameLine": false
       }
     }

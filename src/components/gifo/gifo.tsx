@@ -8,7 +8,7 @@ export interface GifoProps {
   Id: string;
   images: {
     original: {
-      url: string;
+      webp: string;
     };
   };
   title: string;
@@ -36,7 +36,7 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
     <div className=" mr-0 flex h-32  w-40 justify-center md:h-48 md:w-64">
       <img
         className="max-w-40 md:max-w-64 h-auto  w-auto md:max-h-48"
-        src={images.original.url}
+        src={images.original.webp}
         alt={title}
         loading="lazy"
       ></img>
@@ -46,13 +46,20 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
             className={`h-8 w-8 cursor-pointer ${isFavorite ? 'btnLike bg-gray-700' : 'btnLike2'}`}
             id={Id}
             onClick={handleFavorite}
-            title='Add to favorites'
+            title="Añadir a favoritos"
           >
             F
           </div>
-          <div className="h-8 w-8 cursor-pointer" title='Descargar' onClick={() => blobDwnld(images.original.url, title)}
-          >D</div>
-          <div className="h-8 w-8 cursor-pointer" title='Expandir'>E</div>
+          <div
+            className="h-8 w-8 cursor-pointer"
+            title="Descargar"
+            onClick={() => blobDwnld(images.original.webp, title)}
+          >
+            D
+          </div>
+          <div className="h-8 w-8 cursor-pointer" title="Expandir">
+            E
+          </div>
         </div>
         <div className="md:max-w-48 box-border flex flex-col justify-end align-bottom text-white">
           <p className="gifUser max-w-48 break-all">{username !== '' ? username : 'None'}</p>

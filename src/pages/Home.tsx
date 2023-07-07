@@ -29,8 +29,7 @@ const Home = ({ className }: { className: string }): JSX.Element => {
       setDataSearch(result.data);
     };
     fetchData();
-  }
-  , [limit, offset]);
+  }, [limit, offset]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,9 +37,8 @@ const Home = ({ className }: { className: string }): JSX.Element => {
       setDataSuggest(result.data);
     };
     fetchData();
-  }
-  , [topic]);
-  
+  }, [topic]);
+
   //handle search from a trending topic
   const handleSearch = async (topic: string) => {
     setTopic(topic);
@@ -75,7 +73,7 @@ const Home = ({ className }: { className: string }): JSX.Element => {
   };
 
   const renderLoadMore = () => {
-    if (dataSearch.length > limit-1) {
+    if (dataSearch.length > limit - 1) {
       return (
         <div className="loadMore">
           <button className="btn btnLoadMore dark:text-gray-200" onClick={handleLoadMore}>
@@ -148,7 +146,7 @@ const Home = ({ className }: { className: string }): JSX.Element => {
               <div className="searchSuggest flex flex-col items-center justify-start">
                 {dataSuggest.slice(0, 4).map((item: any, index: number) => {
                   return (
-                    <div className='flex flex-row' onClick={() => handleSearch(item.name)}>
+                    <div className="flex flex-row" onClick={() => handleSearch(item.name)}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
