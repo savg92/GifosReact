@@ -54,7 +54,9 @@ const MyGIF = () => {
     <>
       <Layout>
         {renderGifos()}
-        <div className="flex flex-col items-center justify-center py-10">{renderLoadMore()}</div>
+        <div className="flex flex-col items-center justify-center py-10">
+          {renderLoadMore()}
+        </div>
         <Trending />
       </Layout>
     </>
