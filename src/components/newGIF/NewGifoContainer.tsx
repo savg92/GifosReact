@@ -4,7 +4,7 @@ import AccessCamera from './AccessCamera';
 import StartGifProcess from './StartGifProcess';
 
 const NewGifoContainer = () => {
-  const webcamRef = useRef<MediaStream | undefined>();
+  const webcamRef = useRef<Webcam>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const [capturing, setCapturing] = useState<boolean>(false);
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
@@ -20,45 +20,7 @@ const NewGifoContainer = () => {
   const two = useRef<HTMLButtonElement>(null);
   const three = useRef<HTMLButtonElement>(null);
   const chro = useRef<HTMLButtonElement>(null);
-  const repeatSnap = useRef(null);
-
-  /* 
-    on click button ref={allow}
-    check if the user has a camera, if not, show a message. User can't create a gifo without a camera
-    If yes, remove from ref={middleContainer} the component StartGifProcess 
-    render the component AccessCamera
-    ask for permission to use the camera
-    hide button ref={allow}
-    show button ref={start}
-    show camera on screen ref={middleContainer}
-  */
-  // const handleAllow = () => {
-  //   setStep(1);
-  //   console.log(step);
-  //   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-  //     alert('No camera found');
-  //     setAllowCamera(false);
-  //   } else {
-  //     setStep(3);
-  //     console.log(step);
-  //     // setAllowCamera(true);
-  //     // middleContainer.current?.removeChild(<AccessCamera />);
-  //     const video = document.createElement('video');
-  //     video.setAttribute('autoPlay', '');
-  //     video.setAttribute('id', 'vid2');
-  //     middleContainer.current?.insertAdjacentElement('afterbegin', video);
-  //     navigator.mediaDevices
-  //       .getUserMedia({ audio: false, video: { width: 480, height: 320 } })
-  //       .then((stream) => {
-  //         const video = document.getElementById('vid2') as HTMLVideoElement;
-  //         video.srcObject = stream;
-  //         video.play();
-  //       });
-  //     allow.current?.classList.add('hidden');
-  //     start.current?.classList.remove('hidden');
-  //     //   middleContainer.current?.appendChild
-  //   }
-  // };
+  const repeatSnap = useRef<HTMLDivElement>(null);
 
   const handleAllow = () => {
     setStep(1);
@@ -146,18 +108,8 @@ const NewGifoContainer = () => {
     repeatSnap.current?.classList.add('hidden');
     uploadNewGifo.current?.classList.add('hidden');
     start.current?.classList.remove('hidden');
-    // const video = document.createElement('video');
-    // video.setAttribute('autoPlay', '');
-    // video.setAttribute('id', 'vid2');
-    // middleContainer.current?.insertAdjacentElement('afterbegin', video);
-    // navigator.mediaDevices
-    //   .getUserMedia({ audio: false, video: { width: 480, height: 320 } })
-    //   .then((stream) => {
-    //     const video = document.getElementById('vid2') as HTMLVideoElement;
-    //     video.srcObject = stream;
-    //     video.play();
-    //   });
     setStep(2);
+    setRecordedChunks([]);
   };
 
   const handleDataAvailable = useCallback(
@@ -171,8 +123,8 @@ const NewGifoContainer = () => {
 
   const handleStartCaptureClick = useCallback(() => {
     setCapturing(true);
-    if (webcamRef.current) {
-      mediaRecorderRef.current = new MediaRecorder(webcamRef.current?.stream, {
+    if (webcamRef.current?.stream) {
+      mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
         mimeType: 'video/webm',
       });
       mediaRecorderRef.current.addEventListener('dataavailable', handleDataAvailable);
@@ -198,7 +150,7 @@ const NewGifoContainer = () => {
   const handleDownload = useCallback(() => {
     if (recordedChunks.length) {
       const blob = new Blob(recordedChunks, {
-        type: 'video/webm',
+        type: 'video/mp4',
       });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -241,14 +193,24 @@ const NewGifoContainer = () => {
             {step == 1 && <AccessCamera />}
             {step == 2 && (
               <Webcam
-                height={400}
-                width={400}
+                width={420}
                 audio={false}
                 mirrored={true}
                 ref={webcamRef}
                 videoConstraints={videoConstraints}
               />
             )}
+            {
+              // show blob video in recordedChunks state if step is 3 and recordedChunks is not empty
+              step === 3 && recordedChunks.length > 0 && (
+                <video
+                  className="w-[400px]"
+                  src={URL.createObjectURL(new Blob(recordedChunks, { type: 'video/mp4' }))}
+                  autoPlay
+                  loop
+                />
+              )
+            }
           </div>
           <div className="flex w-full flex-row items-center justify-between p-7 pt-0">
             <div className="bottomRight h-[25px] w-[27px] border-b-2 border-l-2 border-solid border-green-400 dark:border-gray-400"></div>
@@ -277,13 +239,13 @@ const NewGifoContainer = () => {
             </span>
           </div>
           <div className="buttons">
-            <span
-              id="chro"
-              className="chronometer hidden font-bold text-violet-700  dark:text-gray-200"
-              ref={chro}
-            >
-              {/* {chronometer} */}
-            </span>
+            {step === 2 && (
+              <span
+                id="chro"
+                className="chronometer hidden font-bold text-violet-700  dark:text-gray-200"
+                ref={chro}
+              ></span>
+            )}
             <div className="repeatSnapContainer hidden" ref={repeatSnap}>
               <button
                 className="repeatSnap font-bold text-violet-700 underline decoration-green-400 decoration-2 underline-offset-2 dark:text-gray-200"
@@ -310,6 +272,7 @@ const NewGifoContainer = () => {
             upload
           </button>
         </div>
+        <button onClick={() => console.log(step, recordedChunks)}>asd</button>
       </div>
     </>
   );
