@@ -17,7 +17,7 @@ const Favorites = (): JSX.Element => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getFavoriteGifos(favorites);
+      const result = favorites.length === 0 ? null : await getFavoriteGifos(favorites);
       console.log(result);
       setData(result.data);
     };

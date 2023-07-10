@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
+import { createGifo } from '../../services/services';
 import Webcam from 'react-webcam';
 import AccessCamera from './AccessCamera';
 import StartGifProcess from './StartGifProcess';
@@ -6,10 +7,8 @@ import StartGifProcess from './StartGifProcess';
 const NewGifoContainer = () => {
   const webcamRef = useRef<Webcam>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [capturing, setCapturing] = useState<boolean>(false);
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
   const [step, setStep] = useState<number>(0);
-  const [allowCamera, setAllowCamera] = useState<boolean>(false);
 
   const allow = useRef<HTMLButtonElement>(null);
   const start = useRef<HTMLButtonElement>(null);
@@ -24,15 +23,12 @@ const NewGifoContainer = () => {
 
   const handleAllow = () => {
     setStep(1);
-    console.log(step);
     setTimeout(() => {
       // check if the user has a camera
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
         alert('No camera found');
-        setAllowCamera(false);
       } else {
         setStep(2);
-        console.log(step);
         allow.current?.classList.add('hidden');
         start.current?.classList.remove('hidden');
       }
@@ -55,55 +51,6 @@ const NewGifoContainer = () => {
     }, 1);
   };
 
-  /* 
-    on click button ref={start}
-    start recording video
-    hide button ref={start}
-    show ref={chro} and start chronometer
-    show button ref={stop}, on click stop recording and stop chronometer
-    play video on screen ref={middleContainer}
-    show button ref={repeatSnap}, on click repeat recording
-    show button ref={uploadNewGifo}, on click upload gifo
-  */
-  // const handleStart = () => {
-  //   start.current?.classList.add('hidden');
-  //   chro.current?.classList.remove('hidden');
-  //   stop.current?.classList.remove('hidden');
-  //   chronometer();
-  //   const video = document.getElementById('vid2') as HTMLVideoElement;
-  //   const mediaRecorder = new MediaRecorder(video.srcObject as MediaStream);
-  //   mediaRecorder.start();
-  //   console.log(mediaRecorder.state);
-  //   console.log('recorder started');
-  //   let chunks: Blob[] = [];
-  //   mediaRecorder.ondataavailable = function (e) {
-  //     chunks.push(e.data);
-  //   };
-  //   mediaRecorder.onstop = function (e) {
-  //     console.log('recorder stopped');
-  //     const blob = new Blob(chunks, { type: 'video/mp4' });
-  //     chunks = [];
-  //     const videoURL = window.URL.createObjectURL(blob);
-  //     video.src = videoURL;
-  //   };
-  //   stop.current?.addEventListener('click', () => {
-  //     mediaRecorder.stop();
-  //     console.log(mediaRecorder.state);
-  //     console.log('recorder stopped');
-  //     stop.current?.classList.add('hidden');
-  //     repeatSnap.current?.classList.remove('hidden');
-  //     uploadNewGifo.current?.classList.remove('hidden');
-  //     chro.current?.classList.add('hidden');
-  //     // remove element with id="vid2"
-  //     const video = document.getElementById('vid2') as HTMLVideoElement;
-
-  //     video.remove();
-  //   });
-  //   // play recorded video on screen ref={middleContainer}
-  //   video.play();
-
-  // };
-
   const handleRepeat = () => {
     repeatSnap.current?.classList.add('hidden');
     uploadNewGifo.current?.classList.add('hidden');
@@ -122,10 +69,18 @@ const NewGifoContainer = () => {
   );
 
   const handleStartCaptureClick = useCallback(() => {
-    setCapturing(true);
+    // check on browser compatibility for mp4 and webm
+    const formats = ['video/webm', 'video/mp4'];
+    let format = '';
+    navigator.userAgent.includes('Safari') ? (format = formats[1]) : (format = formats[0]);
     if (webcamRef.current?.stream) {
       mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
-        mimeType: 'video/webm',
+        mimeType: format,
+        // mimeType: 'image/gif'
+      });
+      mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
+        mimeType: format,
+        // mimeType: 'image/gif'
       });
       mediaRecorderRef.current.addEventListener('dataavailable', handleDataAvailable);
       mediaRecorderRef.current.start();
@@ -134,30 +89,58 @@ const NewGifoContainer = () => {
     chro.current?.classList.remove('hidden');
     stop.current?.classList.remove('hidden');
     chronometer();
-  }, [webcamRef, setCapturing, mediaRecorderRef, handleDataAvailable]);
+  }, [webcamRef, mediaRecorderRef, handleDataAvailable]);
 
   const handleStopCaptureClick = useCallback(() => {
     mediaRecorderRef.current?.stop();
-    setCapturing(false);
     stop.current?.classList.add('hidden');
     repeatSnap.current?.classList.remove('hidden');
     uploadNewGifo.current?.classList.remove('hidden');
     chro.current?.classList.add('hidden');
-    console.log(recordedChunks);
     setStep(3);
-  }, [mediaRecorderRef, setCapturing]);
+  }, [mediaRecorderRef]);
+
+  // upload new gifo to giphy as a blob
+  const handleUpload = useCallback(async () => {
+    if (recordedChunks.length > 0) {
+      setStep(4);
+      repeatSnap.current?.classList.add('hidden');
+      uploadNewGifo.current?.classList.add('hidden');
+      try {
+        /*
+          tries to fetch
+          while there is a response, sets step 4, hiddes buton repeatSnap and uploadNewGifo
+          once there is a successfull response, it sets step 5
+        */
+        const response = await createGifo(recordedChunks[0]);
+        if (response) {
+          setStep(5);
+        }
+
+      } catch (error: any) {
+        if (error.response && error.response.status === 403) {
+          console.error('API request failed with 403 Forbidden error:', error.response.data);
+          // handle 403 Forbidden error
+        } else {
+          console.error('API request failed with error:', error);
+          // handle other errors
+        }
+      }
+    }
+  }, [recordedChunks]);
 
   const handleDownload = useCallback(() => {
     if (recordedChunks.length) {
       const blob = new Blob(recordedChunks, {
-        type: 'video/mp4',
+        // type: 'video/mp4',
+        type: 'gif',
       });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       document.body.appendChild(a);
       a.classList.add('hidden');
       a.href = url;
-      a.download = 'react-webcam-stream-capture.webm';
+      a.download = 'Gifos.gif';
       a.click();
       window.URL.revokeObjectURL(url);
       setRecordedChunks([]);
@@ -186,7 +169,7 @@ const NewGifoContainer = () => {
             <div className="topRight h-[25px] w-[27px] border-r-2 border-t-2 border-solid border-green-400 dark:border-gray-400"></div>
           </div>
           <div
-            className="middleContainer -my-3 flex flex-col items-center justify-center dark:text-gray-200"
+            className="middleContainer -my-3 flex flex-col items-center justify-center dark:text-gray-200 "
             ref={middleContainer}
           >
             {step === 0 && <StartGifProcess />}
@@ -198,19 +181,63 @@ const NewGifoContainer = () => {
                 mirrored={true}
                 ref={webcamRef}
                 videoConstraints={videoConstraints}
+                autoPlay
               />
             )}
-            {
-              // show blob video in recordedChunks state if step is 3 and recordedChunks is not empty
-              step === 3 && recordedChunks.length > 0 && (
+            {step === 3 && recordedChunks.length > 0 && (
+              <div>
                 <video
-                  className="w-[400px]"
+                  className="w-[400px] scale-x-[-1] transform"
                   src={URL.createObjectURL(new Blob(recordedChunks, { type: 'video/mp4' }))}
                   autoPlay
                   loop
                 />
-              )
-            }
+              </div>
+            )}
+            {step === 4 && (
+              <div className="absolute box-border flex w-96 flex-1 flex-col justify-between bg-violet-700 opacity-90">
+                <video
+                  className="scale-x-[-1] transform opacity-40"
+                  src={URL.createObjectURL(new Blob(recordedChunks, { type: 'video/mp4' }))}
+                  autoPlay
+                  loop
+                />
+                <div className="absolute inset-0 flex flex-col items-center ">
+                  <div className="flex h-full w-full flex-col items-center justify-center">
+                    <span className="loading">loading</span>
+                    <span className="text-xl font-bold text-white">Estamos subiendo tu GIFO</span>
+                  </div>
+                </div>
+              </div>
+            )}
+            {step === 5 && (
+              <div className="absolute box-border flex w-96 flex-1 flex-col justify-between bg-violet-700 opacity-90">
+                <video
+                  className="scale-x-[-1] transform opacity-40"
+                  src={URL.createObjectURL(new Blob(recordedChunks, { type: 'video/mp4' }))}
+                  autoPlay
+                  loop
+                />
+                <div className="absolute inset-0 flex flex-col items-center ">
+                  <div className="flex w-full justify-end gap-3 p-3 align-top">
+                    <button
+                      className="h-8 w-8 cursor-pointer"
+                      title="Descargar"
+                      onClick={handleDownload}
+                    >
+                      D
+                    </button>
+                    <button className="h-8 w-8 cursor-pointer" title="Obtener link">
+                      L
+                    </button>
+                  </div>
+                  <div className="flex h-full w-full flex-col items-center justify-center">
+                    <span className="checkMark">check mark</span>
+                    <span className="text-xl font-bold text-white">GIFO subido con éxito</span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="flex w-full flex-row items-center justify-between p-7 pt-0">
             <div className="bottomRight h-[25px] w-[27px] border-b-2 border-l-2 border-solid border-green-400 dark:border-gray-400"></div>
@@ -268,11 +295,11 @@ const NewGifoContainer = () => {
           <button className="stopNewGifo hidden" ref={stop} onClick={handleStopCaptureClick}>
             Finalizar
           </button>
-          <button className="uploadNewGifo hidden" ref={uploadNewGifo}>
+          <button className="uploadNewGifo hidden" ref={uploadNewGifo} onClick={handleUpload}>
             upload
           </button>
         </div>
-        <button onClick={() => console.log(step, recordedChunks)}>asd</button>
+        <button onClick={() => console.log(step, recordedChunks[0].arrayBuffer())}>asd</button>
       </div>
     </>
   );

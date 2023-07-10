@@ -26,14 +26,18 @@ const getFavoriteGifos = async (ids: string[]) => {
 }
 
 const createGifo = async (file: Blob) => {
-    if (!file) {
-        throw new Error('File is undefined or null');
-    }
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('api_key', key);
-    const response = await axios.post(`${baseUrl}gifs?api_key=${key}`, formData);
-    return response.data;
+  if (!file) {
+    throw new Error('File is undefined or null');
+  }
+    const data = new FormData();
+    data.append('file', file, 'myGifo.gif');
+    // formData.append('api_key', key);
+    const response = await axios.post(`${baseUrl}gifs?api_key=${key}&file=${data}`, data, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+    return response.data
 };
 
 const autoSuggest = async (query: string) => {

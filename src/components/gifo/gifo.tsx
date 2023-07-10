@@ -35,31 +35,31 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
   return (
     <div className=" mr-0 flex h-32  w-40 justify-center md:h-48 md:w-64">
       <img
-        className="max-w-40 md:max-w-64 h-auto  w-auto md:max-h-48"
+        className="max-w-40 md:max-w-64 h-auto w-auto md:max-h-48"
         src={images.original.webp}
         alt={title}
         loading="lazy"
       ></img>
       <div className="absolute box-border flex h-32 w-40 flex-1 flex-col justify-between p-4 opacity-0 hover:bg-violet-500 hover:opacity-90 md:h-48 md:w-64">
         <div className="flex justify-end gap-1 align-top">
-          <div
+          <button
             className={`h-8 w-8 cursor-pointer ${isFavorite ? 'btnLike bg-gray-700' : 'btnLike2'}`}
             id={Id}
             onClick={handleFavorite}
             title="Añadir a favoritos"
           >
             F
-          </div>
-          <div
+          </button>
+          <button
             className="h-8 w-8 cursor-pointer"
             title="Descargar"
             onClick={() => blobDwnld(images.original.webp, title)}
           >
             D
-          </div>
-          <div className="h-8 w-8 cursor-pointer" title="Expandir">
+          </button>
+          <button className="h-8 w-8 cursor-pointer" title="Expandir">
             E
-          </div>
+          </button>
         </div>
         <div className="md:max-w-48 box-border flex flex-col justify-end align-bottom text-white">
           <p className="gifUser max-w-48 break-all">{username !== '' ? username : 'None'}</p>

@@ -1,13 +1,10 @@
-import classNames from 'classnames';
-import styles from './footer.module.scss';
+// import classNames from 'classnames';
+// import styles from './footer.module.scss';
+import Twitter from '../..//..//assets/Twitter';
 
-export interface FooterProps {
-  className?: string;
-}
-
-export const Footer = ({ className }: FooterProps) => {
+export const Footer = () => {
   return (
-    <div className={classNames(styles.root, className)}>
+    <>
       <footer className="dark:bg-gray-800">
         <div className="flex flex-col items-center justify-between px-20 py-4 md:flex-row">
           <ul className="flex items-center justify-between px-20 py-4 dark:text-gray-200">
@@ -27,7 +24,8 @@ export const Footer = ({ className }: FooterProps) => {
                 href="#"
                 className="flex items-center px-3 py-2 text-xs font-bold uppercase leading-snug text-gray-800 hover:opacity-75 dark:text-gray-200"
               >
-                <span className="ml-2">T</span>
+                {/* <span className="ml-2">T</span> */}
+                <Twitter fill="red" />
               </a>
             </li>
             <li>
@@ -49,6 +47,6 @@ export const Footer = ({ className }: FooterProps) => {
         </div>
         <div className="col-start-1 col-end-6 row-start-1 row-end-2 h-1 w-full bg-indigo-600 dark:bg-black"></div>
       </footer>
-    </div>
+    </>
   );
 };
