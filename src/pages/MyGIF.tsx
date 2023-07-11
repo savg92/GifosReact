@@ -4,9 +4,14 @@ import Trending from '../components/trending/trending';
 import LayoutContainer from '../components/layoutContainer/layoutContainer';
 import { getFavoriteGifos } from '../services/services';
 
+import NoMyGifo from '../assets/icon-mis-gifos-sin-contenido.svg';
+import sectionIcon from '../assets/icon-mis-gifos.svg';
+
 const content = {
+  icon: sectionIcon,
   title: 'Mis GIFOS',
-  NoFavGifo: '¡Anímate a crear tu primer GIFO!',
+  NoMyGifo: '¡Anímate a crear tu primer GIFO!',
+  NoMyGifoImg: NoMyGifo,
 };
 
 const MyGIF = () => {
@@ -16,8 +21,10 @@ const MyGIF = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await getFavoriteGifos(MyGif);
-      setData(result.data);
+      if (MyGif.length !== 0) {
+        const result = await getFavoriteGifos(MyGif);
+        return setData(result.data);
+      }
     };
     fetchData();
   }, [MyGif]);
@@ -30,7 +37,7 @@ const MyGIF = () => {
   const renderGifos = () => {
     const gifos = data.slice(0, limit);
     return (
-      <LayoutContainer section={content.title} dataValue={gifos} noDataText={content.NoFavGifo} />
+      <LayoutContainer sectionIcon={content.icon} section={content.title} dataValue={gifos} noDataText={content.NoMyGifo} noDataImg={content.NoMyGifoImg} />
     );
   };
 
@@ -42,7 +49,10 @@ const MyGIF = () => {
     if (data.length > limit) {
       return (
         <div className="loadMore">
-          <button className="btn btnLoadMore dark:text-gray-200" onClick={handleLoadMore}>
+          <button
+            className="btn btnLoadMore h-12 w-60 rounded-full border border-indigo-600 px-4 py-2 font-semibold text-indigo-600 transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800"
+            onClick={handleLoadMore}
+          >
             Ver más
           </button>
         </div>

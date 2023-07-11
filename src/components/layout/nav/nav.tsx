@@ -100,13 +100,13 @@ export const Nav = ({ className, }: NavProps) => {
                   MIS GIFOS
                 </a>
               </li>
-              <li>
+              <li className="flex h-12 w-10 items-center justify-center align-middle">
                 <a
                   href="/newgif"
-                  className={`rounded-full border-2 border-solid  ${
+                  className={`flex h-10 w-12 items-center justify-center rounded-full border-2 border-solid text-center ${
                     pathName === '/newgif'
-                      ? 'border-gray-400 text-gray-400'
-                      : 'border-violet-700 text-violet-700 dark:border-gray-200 dark:text-gray-200'
+                      ? 'border-gray-400 bg-slate-400 text-2xl text-white '
+                      : 'border-violet-700 text-violet-700 hover:bg-violet-700 hover:text-white dark:border-gray-200 dark:text-gray-200 dark:hover:bg-white dark:hover:text-gray-800'
                   } `}
                 >
                   +

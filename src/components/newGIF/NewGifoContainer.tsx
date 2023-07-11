@@ -4,6 +4,12 @@ import Webcam from 'react-webcam';
 import AccessCamera from './AccessCamera';
 import StartGifProcess from './StartGifProcess';
 
+import loader from '../../assets/loader.svg';
+import movie from '../../assets/pelicula.svg';
+import camera from '../../assets/camara.svg';
+import cameraLight from '../../assets/element-luz-camara.svg';
+import check from '../../assets/check.svg';
+
 const NewGifoContainer = () => {
   const webcamRef = useRef<Webcam>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -116,7 +122,6 @@ const NewGifoContainer = () => {
         if (response) {
           setStep(5);
         }
-
       } catch (error: any) {
         if (error.response && error.response.status === 403) {
           console.error('API request failed with 403 Forbidden error:', error.response.data);
@@ -157,9 +162,9 @@ const NewGifoContainer = () => {
     <>
       <div className="containerCreateGifo mt-16 grid grid-cols-9 grid-rows-6 py-8">
         {/* <!-- <video id="vid2" controls></video> --> */}
-        <div className="cameraArea col-start-2 col-end-5 row-start-2 row-end-3">
-          <span className="camera col-start-2 col-end-3 row-start-2 row-end-3">a</span>
-          <span className="cameraLight col-start-3 col-end-5 row-start-2 row-end-3">b</span>
+        <div className="cameraArea col-start-2 col-end-5 row-start-2 row-end-4 flex">
+          <img src={camera} alt="camera" className="" />
+          <img src={cameraLight} alt="cameraLight" className=" h-5/6 pt-10" />
         </div>
 
         {/* center container */}
@@ -204,7 +209,11 @@ const NewGifoContainer = () => {
                 />
                 <div className="absolute inset-0 flex flex-col items-center ">
                   <div className="flex h-full w-full flex-col items-center justify-center">
-                    <span className="loading">loading</span>
+                    <img
+                      src={loader}
+                      alt="loader"
+                      className="w-6 rotate-180 animate-spin transition duration-1000 ease-in-out"
+                    />
                     <span className="text-xl font-bold text-white">Estamos subiendo tu GIFO</span>
                   </div>
                 </div>
@@ -232,7 +241,7 @@ const NewGifoContainer = () => {
                     </button>
                   </div>
                   <div className="flex h-full w-full flex-col items-center justify-center">
-                    <span className="checkMark">check mark</span>
+                    <img src={check} alt="check" className="w-6" />
                     <span className="text-xl font-bold text-white">GIFO subido con éxito</span>
                   </div>
                 </div>
@@ -283,23 +292,40 @@ const NewGifoContainer = () => {
             </div>
           </div>
         </div>
-        <span className="movie col-start-8 col-end-9 row-start-5 row-end-5 -mt-7">m</span>
+        <span className="movie col-start-8 col-end-9 row-start-5 row-end-5 -mt-7">
+          <img src={movie} alt="movie" />
+        </span>
         <span className="createGifoBar col-start-3 col-end-8 row-start-6 row-end-6 h-2 w-full rounded bg-indigo-600"></span>
         <div className="btnsContainer my- col-start-5 col-end-5 row-start-6 row-end-6 flex items-center justify-center">
-          <button className="snap" ref={allow} onClick={handleAllow}>
-            Comenzar
+          <button
+            className="snap h-12 w-60 rounded-full border border-indigo-600 px-4 py-2 font-semibold text-indigo-600 transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800"
+            ref={allow}
+            onClick={handleAllow}
+          >
+            COMENZAR
           </button>
-          <button className="snapNewGifo hidden" ref={start} onClick={handleStartCaptureClick}>
-            Grabar
+          <button
+            className="snapNewGifo hidden h-12 w-60 rounded-full border border-indigo-600 px-4 py-2 font-semibold text-indigo-600 transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800"
+            ref={start}
+            onClick={handleStartCaptureClick}
+          >
+            GRABAR
           </button>
-          <button className="stopNewGifo hidden" ref={stop} onClick={handleStopCaptureClick}>
-            Finalizar
+          <button
+            className="stopNewGifo hidden h-12 w-60 rounded-full border border-indigo-600 px-4 py-2 font-semibold text-indigo-600 transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800"
+            ref={stop}
+            onClick={handleStopCaptureClick}
+          >
+            FINALIZAR
           </button>
-          <button className="uploadNewGifo hidden" ref={uploadNewGifo} onClick={handleUpload}>
-            upload
+          <button
+            className="uploadNewGifo hidden h-12 w-60 rounded-full border border-indigo-600 px-4 py-2 font-semibold text-indigo-600 transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800"
+            ref={uploadNewGifo}
+            onClick={handleUpload}
+          >
+            SUBIR GIFO
           </button>
         </div>
-        <button onClick={() => console.log(step, recordedChunks[0].arrayBuffer())}>asd</button>
       </div>
     </>
   );

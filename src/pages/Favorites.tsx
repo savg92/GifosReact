@@ -5,9 +5,14 @@ import LayoutContainer from '../components/layoutContainer/layoutContainer';
 import { getFavoriteGifos } from '../services/services';
 import Modal from '../components/modal/modal';
 
+import noFavorites from '../assets/icon-fav-sin-contenido.svg';
+import sectionIcon from '../assets/icon-favoritos.svg';
+
 const content = {
+  icon: sectionIcon,
   title: 'Favoritos',
   NoFavGifo: '"¡Guarda tu primer GIFO en Favoritos para que se muestre aquí!"',
+  NoFavImg: noFavorites,
 };
 
 const Favorites = (): JSX.Element => {
@@ -17,9 +22,10 @@ const Favorites = (): JSX.Element => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = favorites.length === 0 ? null : await getFavoriteGifos(favorites);
-      console.log(result);
-      setData(result.data);
+      if (favorites.length !== 0) {
+        const result = await getFavoriteGifos(favorites);
+        return setData(result.data);
+      }
     };
     fetchData();
   }
@@ -32,7 +38,7 @@ const Favorites = (): JSX.Element => {
   */
   const renderGifos = () => {
     const gifos = data.slice(0, limit)
-    return <LayoutContainer section={content.title} dataValue={gifos} noDataText={content.NoFavGifo} />;
+    return <LayoutContainer sectionIcon={content.icon} section={content.title} dataValue={gifos} noDataText={content.NoFavGifo}  noDataImg={content.NoFavImg} />;
   };
 
   const handleLoadMore = () => {
@@ -43,7 +49,10 @@ const Favorites = (): JSX.Element => {
     if ( data.length > limit) {
       return (
         <div className="loadMore">
-          <button className="btn btnLoadMore dark:text-gray-200" onClick={handleLoadMore}>
+          <button
+            className="btn btnLoadMore h-12 w-60 rounded-full border border-indigo-600 px-4 py-2 font-semibold text-indigo-600 transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800"
+            onClick={handleLoadMore}
+          >
             Ver más
           </button>
         </div>

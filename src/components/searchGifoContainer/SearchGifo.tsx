@@ -2,6 +2,9 @@ import LayoutContainer from '../layoutContainer/layoutContainer';
 import { trendingTopics, getSearchGifos, autoSuggest } from '../../services/services';
 import { useEffect, useState } from 'react';
 
+import headerLogo from '../../assets/ilustra_header.svg';
+import searchNoResultIcon from '../../assets/icon-busqueda-sin-resultado.svg';
+
 const SearchGifo = () => {
   const [dataTrending, setDataTrending] = useState<any[]>([]);
   const [dataSearch, setDataSearch] = useState<any[]>([]);
@@ -73,7 +76,10 @@ const SearchGifo = () => {
     if (dataSearch.length > limit - 1) {
       return (
         <div className="loadMore">
-          <button className="btn btnLoadMore dark:text-gray-200" onClick={handleLoadMore}>
+          <button
+            className="btn btnLoadMore h-12 w-60 rounded-full border border-indigo-600 px-4 py-2 font-semibold text-indigo-600 transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800"
+            onClick={handleLoadMore}
+          >
             Ver más
           </button>
         </div>
@@ -87,12 +93,14 @@ const SearchGifo = () => {
         <h1 className="w-56 py-5 text-center text-xl font-bold  text-violet-700 dark:text-gray-200 md:w-80">
           Inspírate, busca, guarda, y crea los mejores <span className="text-green-400">GIFOS</span>
         </h1>
+        <div className="searchBlockImg">
+          <img src={headerLogo} alt="logo" className="w-[273px] md:w-[399px]" />
+        </div>
         <div
-          className={`searchArea  border-2 border-solid border-violet-500 px-16 py-3 dark:border-gray-200 ${
+          className={`searchArea border-2 border-solid border-violet-500 px-16 py-3 dark:border-gray-200 md:w-[551px] ${
             dataSuggest.length === 0 ? 'rounded-full' : 'rounded-lg'
           }`}
         >
-          <div className="searchBlockImg"></div>
           <div className="searchBar flex items-center justify-between  ">
             <input
               type="text"
@@ -141,7 +149,7 @@ const SearchGifo = () => {
             <div className="searchSuggest flex flex-col items-center justify-start">
               {dataSuggest.slice(0, 4).map((item: any, index: number) => {
                 return (
-                  <div className="flex flex-row" onClick={() => handleSearch(item.name)}>
+                  <div className="flex flex-row" key={index} onClick={() => handleSearch(item.name)}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -175,6 +183,7 @@ const SearchGifo = () => {
           <LayoutContainer
             section={topic}
             dataValue={dataSearch}
+            noDataImg={searchNoResultIcon}
             noDataText="Intenta con otra búsqueda."
             topBarColor="border-t-2 border-solid border-gray-200"
           />
