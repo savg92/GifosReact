@@ -25,16 +25,20 @@ const SearchGifo = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if(topic.length!==0){
       const result = await getSearchGifos(`${topic}`, limit, offset);
-      setDataSearch(result.data);
+      return setDataSearch(result.data);
+      }
     };
     fetchData();
   }, [limit, offset]);
 
   useEffect(() => {
     const fetchData = async () => {
+      if(topic.length!==0){
       const result = await autoSuggest(`${topic}`);
-      setDataSuggest(result.data);
+      return setDataSuggest(result.data);
+      }
     };
     fetchData();
   }, [topic]);
