@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import headerLogo from '../../assets/ilustra_header.svg';
 import searchNoResultIcon from '../../assets/icon-busqueda-sin-resultado.svg';
 
-const SearchGifo = () => {
+const SearchGifo : React.FC = () => {
   const [dataTrending, setDataTrending] = useState<any[]>([]);
   const [dataSearch, setDataSearch] = useState<any[]>([]);
   const [dataSuggest, setDataSuggest] = useState<any[]>([]);
@@ -20,8 +20,6 @@ const SearchGifo = () => {
     };
     fetchData();
   }, []);
-
-  // console.log(dataTrending);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -101,11 +99,33 @@ const SearchGifo = () => {
           <img src={headerLogo} alt="logo" className="w-[273px] md:w-[399px]" />
         </div>
         <div
-          className={`searchArea border-2 border-solid border-violet-500 px-16 py-3 dark:border-gray-200 md:w-[551px] ${
-            dataSuggest.length === 0 ? 'rounded-full' : 'rounded-lg'
+          className={`searchArea border-2 border-solid border-violet-500 px-5 py-1 dark:border-gray-200 md:w-[551px] ${
+            topic.length === 0 ? 'rounded-full' : 'rounded-lg'
           }`}
         >
-          <div className="searchBar flex items-center justify-between  ">
+          <div className="searchBar flex items-center justify-between gap-2 py-1">
+            <div className="searchIcon">
+              {topic.length !== 0 ? (
+              
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                />
+              </svg>
+              ) : (
+                <p className=' w-6'></p>
+              )
+              }
+            </div>
             <input
               type="text"
               className="searchInput w-full border-0 border-solid outline-none dark:bg-gray-800 dark:text-gray-200"
@@ -118,6 +138,7 @@ const SearchGifo = () => {
               }}
               onKeyDown={(e) => (e.key === 'Enter' ? handleSearch(topic) : '')}
             />
+            {topic.length == 0 ? (
             <button className="searchBtn" type="submit">
               <div className="searchIcon" onClick={(e) => handleSearch(topic)}>
                 <svg
@@ -135,10 +156,11 @@ const SearchGifo = () => {
                   />
                 </svg>
               </div>
-            </button>
+            </button>)
+            : (
             <button className="searchCloseBtn">
-              <div
-                className="searchCloseIcon  dark:text-gray-200"
+              <p
+                className="searchCloseIcon text-2xl text-violet-700 dark:text-gray-200"
                 onClick={() => {
                   setTopic('');
                   setDataSearch([]);
@@ -146,14 +168,20 @@ const SearchGifo = () => {
                 }}
               >
                 x
-              </div>
+              </p>
             </button>
+            )}
           </div>
-          {dataSuggest.length !== 0 ? (
+          {dataSuggest.length !== 0 && topic.length !== 0 ? (
             <div className="searchSuggest flex flex-col items-center justify-start">
+              <div className={`barTrend w-[505px] border-t-2 border-solid border-gray-200 py-1`}></div>
               {dataSuggest.slice(0, 4).map((item: any, index: number) => {
                 return (
-                  <div className="flex flex-row" key={index} onClick={() => handleSearch(item.name)}>
+                  <div
+                    className="flex flex-row justify-start items-center w-[505px] py-1 gap-2"
+                    key={index}
+                    onClick={() => handleSearch(item.name)}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
