@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Layout from '../components/layout/layout';
 import Trending from '../components/trending/trending';
-import LayoutContainer from '../components/layoutContainer/layoutContainer';
+import LayoutContainer from '../components/layoutContainer/LayoutContainer';
 import { getFavoriteGifos } from '../services/services';
 
 import NoMyGifo from '../assets/icon-mis-gifos-sin-contenido.svg';
@@ -37,7 +37,13 @@ const MyGIF = () => {
   const renderGifos = () => {
     const gifos = data.slice(0, limit);
     return (
-      <LayoutContainer sectionIcon={content.icon} section={content.title} dataValue={gifos} noDataText={content.NoMyGifo} noDataImg={content.NoMyGifoImg} />
+      <LayoutContainer
+        sectionIcon={content.icon}
+        section={content.title}
+        dataValue={gifos}
+        noDataText={content.NoMyGifo}
+        noDataImg={content.NoMyGifoImg}
+      />
     );
   };
 
@@ -64,9 +70,7 @@ const MyGIF = () => {
     <>
       <Layout>
         {renderGifos()}
-        <div className="flex flex-col items-center justify-center py-10">
-          {renderLoadMore()}
-        </div>
+        <div className="flex flex-col items-center justify-center py-10">{renderLoadMore()}</div>
         <Trending />
       </Layout>
     </>

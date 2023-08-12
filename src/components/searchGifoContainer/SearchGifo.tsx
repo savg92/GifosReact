@@ -1,11 +1,11 @@
-import LayoutContainer from '../layoutContainer/layoutContainer';
+import LayoutContainer from '../layoutContainer/LayoutContainer';
 import { trendingTopics, getSearchGifos, autoSuggest } from '../../services/services';
 import { useEffect, useState } from 'react';
 
 import headerLogo from '../../assets/ilustra_header.svg';
 import searchNoResultIcon from '../../assets/icon-busqueda-sin-resultado.svg';
 
-const SearchGifo : React.FC = () => {
+const SearchGifo: React.FC = (): JSX.Element => {
   const [dataTrending, setDataTrending] = useState<any[]>([]);
   const [dataSearch, setDataSearch] = useState<any[]>([]);
   const [dataSuggest, setDataSuggest] = useState<any[]>([]);
@@ -23,9 +23,9 @@ const SearchGifo : React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if(topic.length!==0){
-      const result = await getSearchGifos(`${topic}`, limit, offset);
-      return setDataSearch(result.data);
+      if (topic.length !== 0) {
+        const result = await getSearchGifos(`${topic}`, limit, offset);
+        return setDataSearch(result.data);
       }
     };
     fetchData();
@@ -33,20 +33,19 @@ const SearchGifo : React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if(topic.length!==0){
-      const result = await autoSuggest(`${topic}`);
-      return setDataSuggest(result.data);
+      if (topic.length !== 0) {
+        const result = await autoSuggest(`${topic}`);
+        return setDataSuggest(result.data);
       }
     };
     fetchData();
   }, [topic]);
 
   //handle search from a trending topic
-  const handleSearch = async (topic: string) => {
+  const handleSearch = async (topic: string): Promise<void> => {
     setTopic(topic);
     const result = await getSearchGifos(`${topic}`, limit, offset);
     setDataSearch(result.data);
-    // console.log(result.data);
   };
 
   // render first 5 trending topics in the home page, including the comma and a blanck space at the end of each topic except the last one
@@ -70,11 +69,11 @@ const SearchGifo : React.FC = () => {
     });
   };
 
-  const handleLoadMore = () => {
+  const handleLoadMore = (): void => {
     setLimit(limit + 12);
   };
 
-  const renderLoadMore = () => {
+  const renderLoadMore = (): JSX.Element | undefined => {
     if (dataSearch.length > limit - 1) {
       return (
         <div className="loadMore">
@@ -106,25 +105,23 @@ const SearchGifo : React.FC = () => {
           <div className="searchBar flex items-center justify-between gap-2 py-1">
             <div className="searchIcon">
               {topic.length !== 0 ? (
-              
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-gray-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-gray-400"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                  />
+                </svg>
               ) : (
-                <p className=' w-6'></p>
-              )
-              }
+                <p className=" w-6"></p>
+              )}
             </div>
             <input
               type="text"
@@ -139,46 +136,48 @@ const SearchGifo : React.FC = () => {
               onKeyDown={(e) => (e.key === 'Enter' ? handleSearch(topic) : '')}
             />
             {topic.length == 0 ? (
-            <button className="searchBtn" type="submit">
-              <div className="searchIcon" onClick={(e) => handleSearch(topic)}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6 text-gray-400"
+              <button className="searchBtn" type="submit">
+                <div className="searchIcon" onClick={(e) => handleSearch(topic)}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-6 w-6 text-gray-400"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
+                  </svg>
+                </div>
+              </button>
+            ) : (
+              <button className="searchCloseBtn">
+                <p
+                  className="searchCloseIcon text-2xl text-violet-700 dark:text-gray-200"
+                  onClick={() => {
+                    setTopic('');
+                    setDataSearch([]);
+                    setLimit(12);
+                  }}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                  />
-                </svg>
-              </div>
-            </button>)
-            : (
-            <button className="searchCloseBtn">
-              <p
-                className="searchCloseIcon text-2xl text-violet-700 dark:text-gray-200"
-                onClick={() => {
-                  setTopic('');
-                  setDataSearch([]);
-                  setLimit(12);
-                }}
-              >
-                x
-              </p>
-            </button>
+                  x
+                </p>
+              </button>
             )}
           </div>
           {dataSuggest.length !== 0 && topic.length !== 0 ? (
             <div className="searchSuggest flex flex-col items-center justify-start">
-              <div className={`barTrend w-[505px] border-t-2 border-solid border-gray-200 py-1`}></div>
+              <div
+                className={`barTrend w-[505px] border-t-2 border-solid border-gray-200 py-1`}
+              ></div>
               {dataSuggest.slice(0, 4).map((item: any, index: number) => {
                 return (
                   <div
-                    className="flex flex-row justify-start items-center w-[505px] py-1 gap-2"
+                    className="flex w-[505px] flex-row items-center justify-start gap-2 py-1"
                     key={index}
                     onClick={() => handleSearch(item.name)}
                   >

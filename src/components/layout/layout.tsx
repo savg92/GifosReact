@@ -8,10 +8,10 @@ export interface LayoutProps {
     children: React.ReactNode;
 }
 
-export const Layout = ({ className, children }: LayoutProps) => {
+export const Layout : React.FC<LayoutProps>= ({ className, children }: LayoutProps) : JSX.Element => {
     return (
       <>
-        <Nav />
+        <Nav className="dark:bg-gray-900" />
         <main className={classNames('flex flex-1 flex-col pt-20 dark:bg-gray-800', className)}>
           {children}
         </main>

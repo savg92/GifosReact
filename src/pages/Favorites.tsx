@@ -1,9 +1,10 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Layout from '../components/layout/layout';
 import Trending from '../components/trending/trending';
-import LayoutContainer from '../components/layoutContainer/layoutContainer';
+import LayoutContainer from '../components/layoutContainer/LayoutContainer';
 import { getFavoriteGifos } from '../services/services';
-import Modal from '../components/modal/modal';
+// import Modal from '../components/modal/modal';
+import Modal from '../components/layoutContainer/Modal';
 
 import noFavorites from '../assets/icon-fav-sin-contenido.svg';
 import sectionIcon from '../assets/icon-favoritos.svg';
@@ -18,6 +19,7 @@ const content = {
 const Favorites = (): JSX.Element => {
   const [data, setData] = useState<any[]>([]);
   const [limit, setLimit] = useState<number>(12);
+  const [gifos, setGifos] = useState<any[]>([]);
   const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
   useEffect(() => {
@@ -28,25 +30,31 @@ const Favorites = (): JSX.Element => {
       }
     };
     fetchData();
-  }
-  , [favorites]);
+  }, [favorites]);
+
+  useEffect(() => {
+    const gifos = data.slice(0, limit);
+    setGifos(gifos);
+  }, [data, limit]);
 
   /*
   render favorite gifos in the favorites page using the data state but limits the number of gifos to 20
   render a loading spinner while the data is being fetched
   render a 'load more' button to fetch more gifos, only if the data state has more than 20 gifos
   */
-  const renderGifos = () => {
-    const gifos = data.slice(0, limit)
-    return <LayoutContainer sectionIcon={content.icon} section={content.title} dataValue={gifos} noDataText={content.NoFavGifo}  noDataImg={content.NoFavImg} />;
-  };
+  // let gifos = data.slice(0, limit);
+
+  // const renderGifos = () => {
+  //   const gifos = data.slice(0, limit)
+  //   return <LayoutContainer sectionIcon={content.icon} section={content.title} dataValue={gifos} noDataText={content.NoFavGifo}  noDataImg={content.NoFavImg} />;
+  // };
 
   const handleLoadMore = () => {
     setLimit(limit + 12);
   };
 
   const renderLoadMore = () => {
-    if ( data.length > limit) {
+    if (data.length > limit) {
       return (
         <div className="loadMore">
           <button
@@ -63,11 +71,21 @@ const Favorites = (): JSX.Element => {
   return (
     <>
       <Layout>
-        <Modal data={{data}} />
-        {renderGifos()}
-        <div className='flex flex-col items-center justify-center py-10'>
-          {renderLoadMore()}
-        </div>
+
+        {/* {renderGifos()} */}
+        {/* <LayoutContainer sectionIcon={content.icon} section={content.title} dataValue={gifos} noDataText={content.NoFavGifo}  noDataImg={content.NoFavImg} /> */}
+
+        {/* // render LayoutContainer component and re render it when the data state changes */}
+
+        <LayoutContainer
+          sectionIcon={content.icon}
+          section={content.title}
+          dataValue={gifos}
+          noDataText={content.NoFavGifo}
+          noDataImg={content.NoFavImg}
+        />
+
+        <div className="flex flex-col items-center justify-center py-10">{renderLoadMore()}</div>
         <Trending />
       </Layout>
     </>

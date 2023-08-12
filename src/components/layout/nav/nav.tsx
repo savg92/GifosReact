@@ -10,13 +10,13 @@ export interface NavProps {
   className?: string;
 }
 
-export const Nav = ({ className, }: NavProps) => {
-  const pathName = useLocation().pathname;
+export const Nav : React.FC<NavProps> = ({ className, }: NavProps) : JSX.Element => {
+  const pathName : string = useLocation().pathname;
 
-  const [nav, setNav] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [nav, setNav] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
-  const showNav = () => {
+  const showNav: React.MouseEventHandler<HTMLButtonElement> = () : void => {
     setNav(!nav);
   };
 
@@ -26,7 +26,7 @@ export const Nav = ({ className, }: NavProps) => {
     localStorage.setItem('DarkMode', String(isDarkMode));
   }, []);
 
-  const handleToggle = () => {
+  const handleToggle: React.ChangeEventHandler<HTMLInputElement> = () : void => {
     const isDarkMode = localStorage.getItem('DarkMode') === 'true';
     const newIsDarkMode = !isDarkMode;
     setDarkMode(newIsDarkMode);
@@ -67,7 +67,6 @@ export const Nav = ({ className, }: NavProps) => {
                   htmlFor="dark-mode-toggle"
                   className="cursor-pointer font-bold text-violet-700 hover:underline hover:decoration-green-400 dark:text-gray-200"
                 >
-                  {/* {localStorage.getItem('DarkMode') === 'true' ? 'MODO DIURNO' : 'MODO NOCTURNO'} */}
                   {darkMode ? 'MODO DIURNO' : 'MODO NOCTURNO'}
                 </label>
                 <input

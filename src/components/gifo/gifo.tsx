@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import styles from './gifo.module.scss';
 import { blobDwnld } from '../..//handlers/blobDwnld';
 
-import download from '../../assets/icon-download-hover.svg';
-import expand from '../../assets/icon-max-hover.svg';
+import downloadBtnIcon from '../../assets/icon-download-hover.svg';
+import expandBtnIcon from '../../assets/icon-max-hover.svg';
 import NofavIcon from '../../assets/icon-fav-hover.svg';
 import FavIcon from '../../assets/icon-fav-hover2.svg';
 
@@ -15,13 +15,15 @@ export interface GifoProps {
   images: {
     original: {
       webp: string;
+      url: string;
     };
   };
   title: string;
   username: string;
+  onOpen?: () => void;
 }
 
-const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
+const Gifo = ({ className, Id, images, title, username, onOpen}: GifoProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
@@ -38,6 +40,15 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
     setIsFavorite(!isFavorite);
   };
 
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(images.original.url);
+      alert('GIF URL copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy GIF URL: ', err);
+    }
+  };
+
   return (
     <div className=" mr-0 flex h-32  w-40 justify-center md:h-48 md:w-64">
       <img
@@ -45,7 +56,7 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
         src={images.original.webp}
         alt={title}
         loading="lazy"
-      ></img>
+      />
       <div className="absolute box-border flex h-32 w-40 flex-1 flex-col justify-between p-4 opacity-0 hover:bg-violet-500 hover:opacity-90 md:h-48 md:w-64">
         <div className="flex justify-end gap-1 align-top">
           <button
@@ -61,12 +72,12 @@ const Gifo = ({ className, Id, images, title, username }: GifoProps) => {
           <button
             className="h-8 w-8 cursor-pointer"
             title="Descargar"
-            onClick={() => blobDwnld(images.original.webp, title)}
+            onClick={() => blobDwnld(images.original.url, title)}
           >
-            <img src={download} alt="download" className='opacity-70 hover:opacity-100'/>
+            <img src={downloadBtnIcon} alt="download" className='opacity-70 hover:opacity-100'/>
           </button>
           <button className="h-8 w-8 cursor-pointer" title="Expandir">
-            <img src={expand} alt="expand" className='opacity-70 hover:opacity-100'/>
+            <img src={expandBtnIcon} alt="expand" className='opacity-70 hover:opacity-100' onClick={onOpen}/>
           </button>
         </div>
         <div className="md:max-w-48 box-border flex flex-col justify-end align-bottom text-white">

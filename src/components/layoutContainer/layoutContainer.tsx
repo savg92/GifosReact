@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Gifo from '../gifo/gifo';
 import { getFavoriteGifos } from '../../services/services';
+import Modal from './Modal';
 
 interface LayoutContainerProps {
   sectionIcon?: string;
@@ -9,22 +10,33 @@ interface LayoutContainerProps {
   noDataText?: string;
   noDataImg?: string;
   topBarColor?: string;
+  onOpen?: () => void;
 }
 
 {
   /* <Gifo key={index} Id={id} images={images} title={title} username={username} />; */
 }
 
-const layoutContainer = ({
+const LayoutContainer = ({
   sectionIcon,
   section,
   dataValue,
   noDataText,
   noDataImg,
   topBarColor,
+  onOpen,
 }: LayoutContainerProps): JSX.Element => {
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [initialSlide, setInitialSlide] = useState<number>(0);
+
   return (
     <>
+      <Modal
+        isVisible={showModal}
+        onClose={() => setShowModal(false)}
+        modalData={dataValue}
+        initialSlide={initialSlide}
+      />
       <section className="contentFavourites mt-4">
         <div
           className="flex flex-col items-center justify-center pb-8 text-xl font-bold dark:text-gray-200"
@@ -35,8 +47,8 @@ const layoutContainer = ({
           <h1 className="searchedTopic text-violet-700 dark:text-gray-200">{section}</h1>
         </div>
         <div className="flex flex-wrap justify-center">
-          {dataValue && dataValue.length === 0 ? (
-            <div className="flex h-96 w-full justify-center flex-col items-center">
+          {dataValue?.length === 0 ? (
+            <div className="flex h-96 w-full flex-col items-center justify-center">
               <span className="noGif">
                 <img src={noDataImg} alt="noGif" />
               </span>
@@ -53,7 +65,16 @@ const layoutContainer = ({
                 {dataValue?.map((item: any, index: number) => {
                   const { id, images, title, username } = item;
                   return (
-                    <Gifo key={index} Id={id} images={images} title={title} username={username} />
+                    <>
+                      <Gifo
+                        key={index}
+                        Id={id}
+                        images={images}
+                        title={title}
+                        username={username}
+                        onOpen={() => {setShowModal(true), setInitialSlide(index)}}
+                      />
+                    </>
                   );
                 })}
               </div>
@@ -65,4 +86,4 @@ const layoutContainer = ({
   );
 };
 
-export default layoutContainer;
+export default LayoutContainer;

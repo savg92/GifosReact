@@ -5,7 +5,7 @@ import icontwitter from '../../../assets/icon-twitter.svg';
 import facebook from '../../../assets//icon_facebook.svg';
 import instagram from '../../../assets//icon_instagram.svg';
 
-export const Footer = () => {
+export const Footer : React.FC = () : JSX.Element => {
   return (
     <>
       <footer className="dark:bg-gray-800">

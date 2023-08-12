@@ -6,9 +6,12 @@ import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import Modal from '../layoutContainer/Modal';
 
 const trending = () => {
   const [data, setData] = useState<any[]>([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [initialSlide, setInitialSlide] = useState<number>(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,6 +22,7 @@ const trending = () => {
   }, []);
   return (
     <>
+      <Modal isVisible={showModal} onClose={() => setShowModal(false)} modalData={data} initialSlide={initialSlide} />
       <section className="bg-slate-100 p-8 dark:bg-gray-900 md:p-16">
         <div className="flex flex-col items-center justify-center pb-8 dark:text-gray-200">
           <h2 className="trendingTitle text-xl font-bold text-violet-700 dark:text-gray-200">
@@ -62,12 +66,13 @@ const trending = () => {
             }}
           >
             {data.map((item, index) => (
-              <SwiperSlide key={index} className="w-max md:pl-10 ">
+              <SwiperSlide key={index} className="w-max md:pl-10" onClick={() => setInitialSlide(index)}>
                 <Gifo
                   Id={item.id}
                   images={item.images}
                   title={item.title}
                   username={item.username}
+                  onOpen={() => setShowModal(true)}
                 />
               </SwiperSlide>
             ))}
