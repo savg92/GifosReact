@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Gifo from '../gifo/gifo';
-import { getFavoriteGifos } from '../../services/services';
 import Modal from './Modal';
 
 interface LayoutContainerProps {
@@ -28,12 +27,8 @@ const LayoutContainer = ({
 }: LayoutContainerProps): JSX.Element => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [initialSlide, setInitialSlide] = useState<number>(0);
+  // const [data, setData] = useState(dataValue);
 
-  useEffect(() => {
-    (dataValue === undefined || dataValue?.length === 0) && setShowModal(false);
-  }
-  , [dataValue]);
-  
   return (
     <>
       <Modal
