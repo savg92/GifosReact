@@ -23,13 +23,15 @@ const Favorites = (): JSX.Element => {
   const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (favorites.length !== 0) {
-        const result = await getFavoriteGifos(favorites);
-        return setData(result.data);
-      }
-    };
-    fetchData();
+    const controller = new AbortController();
+    if (favorites.length !== 0) {
+      getFavoriteGifos(favorites, controller.signal).then((result) => {
+        setData(result.data);
+      } );
+    }
+    return () => {
+      controller.abort();
+    }
   }, [favorites]);
 
   useEffect(() => {

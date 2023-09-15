@@ -20,25 +20,45 @@ const getSearchGifos = async (query: string, limit: number = 20, offset: number 
     return response.data
 }
 
-const getFavoriteGifos = async (ids: string[]) => {
-    const response = await axios.get(`${baseUrl}gifs?api_key=${key}&ids=${ids}`)
+const getFavoriteGifos = async (ids: string[], signal: AbortSignal) => {
+    const response = await axios.get(`${baseUrl}gifs?api_key=${key}&ids=${ids}`, {
+      signal: signal,
+    })
     return response.data
 }
 
-const createGifo = async (file: Blob) => {
-  if (!file) {
-    throw new Error('File is undefined or null');
-  }
-    const data = new FormData();
-    data.append('file', file, 'myGifo.gif');
-    // formData.append('api_key', key);
-    const response = await axios.post(`${baseUrl}gifs?api_key=${key}&file=${data}`, data, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    })
-    return response.data
-};
+const getGifoById = async (id: string) => {
+  const response = await axios.get(`${baseUrl}gifs?api_key=${key}&ids=${id}`)
+  return response.data
+}
+
+// const createGifo = async (file: Blob) => {
+//   if (!file) {
+//     throw new Error('File is undefined or null');
+//   }
+//     const data = new FormData();
+//     data.append('file', file, 'myGifo.gif');
+//     // formData.append('api_key', key);
+//     const response = await axios.post(`${baseUrl}gifs?api_key=${key}&file=${data}`, data, {
+//         headers: {
+//             'Content-Type': 'multipart/form-data'
+//         }
+//     })
+//     return response.data
+// };
+
+const createGifo = async (file: Blob): Promise<any> => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const response = await fetch(`${baseUrl}gifs?api_key=${key}`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  const data = await response.json();
+  return data;
+}
 
 const autoSuggest = async (query: string) => {
     const response = await axios.get(`${baseUrl}gifs/search/tags?api_key=${key}&q=${query}`)
@@ -49,6 +69,7 @@ export {
   getTrendingGifos,
   getSearchGifos,
   getFavoriteGifos,
+  getGifoById,
   createGifo,
   trendingTopics,
   autoSuggest,

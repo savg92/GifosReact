@@ -20,13 +20,15 @@ const MyGIF = () => {
   const MyGif = JSON.parse(localStorage.getItem('MyGif') || '[]');
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (MyGif.length !== 0) {
-        const result = await getFavoriteGifos(MyGif);
-        return setData(result.data);
-      }
+    const controller = new AbortController();
+    if (MyGif.length !== 0) {
+      getFavoriteGifos(MyGif, controller.signal).then((result) => {
+        setData(result.data);
+      });
+    }
+    return () => {
+      controller.abort();
     };
-    fetchData();
   }, [MyGif]);
 
   /*

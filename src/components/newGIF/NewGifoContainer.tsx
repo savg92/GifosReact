@@ -107,29 +107,47 @@ const NewGifoContainer = () => {
   }, [mediaRecorderRef]);
 
   // upload new gifo to giphy as a blob
+  // const handleUpload = useCallback(async () => {
+  //   if (recordedChunks.length > 0) {
+  //     setStep(4);
+  //     repeatSnap.current?.classList.add('hidden');
+  //     uploadNewGifo.current?.classList.add('hidden');
+  //     try {
+  //       /*
+  //         tries to fetch
+  //         while there is a response, sets step 4, hiddes buton repeatSnap and uploadNewGifo
+  //         once there is a successfull response, it sets step 5
+  //       */
+  //       const response = await createGifo(recordedChunks[0]);
+  //       if (response) {
+  //         setStep(5);
+  //       }
+  //     } catch (error: any) {
+  //       if (error.response && error.response.status === 403) {
+  //         console.error('API request failed with 403 Forbidden error:', error.response.data);
+  //         // handle 403 Forbidden error
+  //       } else {
+  //         console.error('API request failed with error:', error);
+  //         // handle other errors
+  //       }
+  //     }
+  //   }
+  // }, [recordedChunks]);
+
   const handleUpload = useCallback(async () => {
-    if (recordedChunks.length > 0) {
+    if (recordedChunks.length) {
+      const file = new Blob(recordedChunks, { type: 'image/gif' });
       setStep(4);
       repeatSnap.current?.classList.add('hidden');
       uploadNewGifo.current?.classList.add('hidden');
       try {
-        /*
-          tries to fetch
-          while there is a response, sets step 4, hiddes buton repeatSnap and uploadNewGifo
-          once there is a successfull response, it sets step 5
-        */
-        const response = await createGifo(recordedChunks[0]);
-        if (response) {
-          setStep(5);
-        }
-      } catch (error: any) {
-        if (error.response && error.response.status === 403) {
-          console.error('API request failed with 403 Forbidden error:', error.response.data);
-          // handle 403 Forbidden error
-        } else {
-          console.error('API request failed with error:', error);
-          // handle other errors
-        }
+        const gifo = await createGifo(file);
+        console.log(gifo);
+        // setRecordedChunks([]);
+        setStep(5);
+      } catch (error) {
+        console.error('API request failed with error:', error);
+        // handle other errors
       }
     }
   }, [recordedChunks]);

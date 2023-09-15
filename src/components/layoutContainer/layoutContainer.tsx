@@ -47,7 +47,7 @@ const LayoutContainer = ({
           <h1 className="searchedTopic text-violet-700 dark:text-gray-200">{section}</h1>
         </div>
         <div className="flex flex-wrap justify-center">
-          {dataValue?.length === 0 ? (
+          {dataValue?.length == 0 ? (
             <div className="flex h-96 w-full flex-col items-center justify-center">
               <span className="noGif">
                 <img src={noDataImg} alt="noGif" />
@@ -65,7 +65,6 @@ const LayoutContainer = ({
                 {dataValue?.map((item: any, index: number) => {
                   const { id, images, title, username } = item;
                   return (
-                    <>
                       <Gifo
                         key={index}
                         Id={id}
@@ -74,7 +73,6 @@ const LayoutContainer = ({
                         username={username}
                         onOpen={() => {setShowModal(true), setInitialSlide(index)}}
                       />
-                    </>
                   );
                 })}
               </div>
