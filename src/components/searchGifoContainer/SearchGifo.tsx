@@ -1,6 +1,7 @@
 import LayoutContainer from '../layoutContainer/LayoutContainer';
 import { trendingTopics, getSearchGifos, autoSuggest } from '../../services/services';
 import { useEffect, useState } from 'react';
+import { renderLoadMore } from '../../handlers/renderLoadMore';
 
 import headerLogo from '../../assets/ilustra_header.svg';
 import searchNoResultIcon from '../../assets/icon-busqueda-sin-resultado.svg';
@@ -67,25 +68,6 @@ const SearchGifo: React.FC = (): JSX.Element => {
         </span>
       );
     });
-  };
-
-  const handleLoadMore = (): void => {
-    setLimit(limit + 12);
-  };
-
-  const renderLoadMore = (): JSX.Element | undefined => {
-    if (dataSearch.length > limit - 1) {
-      return (
-        <div className="loadMore">
-          <button
-            className="btn btnLoadMore h-12 w-60 rounded-full border border-indigo-600 px-4 py-2 font-semibold text-indigo-600 transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800"
-            onClick={handleLoadMore}
-          >
-            Ver más
-          </button>
-        </div>
-      );
-    }
   };
 
   return (
@@ -221,7 +203,10 @@ const SearchGifo: React.FC = (): JSX.Element => {
         ) : (
           <span></span>
         )}
-        <div className="flex flex-col items-center justify-center py-10">{renderLoadMore()}</div>
+        <div className="flex flex-col items-center justify-center py-10">
+          {renderLoadMore(limit, setLimit, dataSearch, 1)}
+          {/* {renderLoadMore()} */}
+        </div>
       </section>
     </>
   );

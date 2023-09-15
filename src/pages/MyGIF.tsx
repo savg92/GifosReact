@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import Layout from '../components/layout/layout';
 import Trending from '../components/trending/trending';
 import LayoutContainer from '../components/layoutContainer/LayoutContainer';
-import { getFavoriteGifos } from '../services/services';
+import { getMultipleGifos } from '../services/services';
+import { renderLoadMore } from '..//handlers/renderLoadMore';
 
 import NoMyGifo from '../assets/icon-mis-gifos-sin-contenido.svg';
 import sectionIcon from '../assets/icon-mis-gifos.svg';
@@ -22,7 +23,7 @@ const MyGIF = () => {
   useEffect(() => {
     const controller = new AbortController();
     if (MyGif.length !== 0) {
-      getFavoriteGifos(MyGif, controller.signal).then((result) => {
+      getMultipleGifos(MyGif, controller.signal).then((result) => {
         setData(result.data);
       });
     }
@@ -49,30 +50,13 @@ const MyGIF = () => {
     );
   };
 
-  const handleLoadMore = () => {
-    setLimit(limit + 12);
-  };
-
-  const renderLoadMore = () => {
-    if (data.length > limit) {
-      return (
-        <div className="loadMore">
-          <button
-            className="btn btnLoadMore h-12 w-60 rounded-full border border-indigo-600 px-4 py-2 font-semibold text-indigo-600 transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800"
-            onClick={handleLoadMore}
-          >
-            Ver más
-          </button>
-        </div>
-      );
-    }
-  };
-
   return (
     <>
       <Layout>
         {renderGifos()}
-        <div className="flex flex-col items-center justify-center py-10">{renderLoadMore()}</div>
+        <div className="flex flex-col items-center justify-center py-10">
+          {renderLoadMore(limit, setLimit, data)}
+        </div>
         <Trending />
       </Layout>
     </>

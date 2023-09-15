@@ -52,7 +52,6 @@ const NewGifoContainer = () => {
       mm = Math.floor((elapsed % 3600000) / 60000);
       ss = Math.floor((elapsed % 60000) / 1000);
       format = ('0' + hh).slice(-2) + ':' + ('0' + mm).slice(-2) + ':' + ('0' + ss).slice(-2);
-      // chro.innerHTML = format;
       if (chro.current) chro.current.innerHTML = format;
     }, 1);
   };
@@ -143,11 +142,9 @@ const NewGifoContainer = () => {
       try {
         const gifo = await createGifo(file);
         console.log(gifo);
-        // setRecordedChunks([]);
         setStep(5);
       } catch (error) {
         console.error('API request failed with error:', error);
-        // handle other errors
       }
     }
   }, [recordedChunks]);

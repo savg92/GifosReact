@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import Layout from '../components/layout/layout';
 import Trending from '../components/trending/trending';
 import LayoutContainer from '../components/layoutContainer/LayoutContainer';
-import { getFavoriteGifos } from '../services/services';
-// import Modal from '../components/modal/modal';
-import Modal from '../components/layoutContainer/Modal';
+import { getMultipleGifos } from '../services/services';
+import { renderLoadMore } from '..//handlers/renderLoadMore';
 
 import noFavorites from '../assets/icon-fav-sin-contenido.svg';
 import sectionIcon from '../assets/icon-favoritos.svg';
@@ -25,9 +24,9 @@ const Favorites = (): JSX.Element => {
   useEffect(() => {
     const controller = new AbortController();
     if (favorites.length !== 0) {
-      getFavoriteGifos(favorites, controller.signal).then((result) => {
+      getMultipleGifos(favorites, controller.signal).then((result) => {
         setData(result.data);
-      } );
+      });
     }
     return () => {
       controller.abort();
@@ -39,46 +38,27 @@ const Favorites = (): JSX.Element => {
     setGifos(gifos);
   }, [data, limit]);
 
-  /*
-  render favorite gifos in the favorites page using the data state but limits the number of gifos to 20
-  render a loading spinner while the data is being fetched
-  render a 'load more' button to fetch more gifos, only if the data state has more than 20 gifos
-  */
-  // let gifos = data.slice(0, limit);
-
-  // const renderGifos = () => {
-  //   const gifos = data.slice(0, limit)
-  //   return <LayoutContainer sectionIcon={content.icon} section={content.title} dataValue={gifos} noDataText={content.NoFavGifo}  noDataImg={content.NoFavImg} />;
-  // };
-
-  const handleLoadMore = () => {
-    setLimit(limit + 12);
-  };
-
-  const renderLoadMore = () => {
-    if (data.length > limit) {
-      return (
-        <div className="loadMore">
-          <button
-            className="btn btnLoadMore h-12 w-60 rounded-full border border-indigo-600 px-4 py-2 font-semibold text-indigo-600 transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white dark:border-gray-200 dark:text-gray-200 dark:hover:bg-gray-200 dark:hover:text-gray-800"
-            onClick={handleLoadMore}
-          >
-            Ver más
-          </button>
-        </div>
-      );
-    }
-  };
-
   return (
     <>
       <Layout>
-
-        {/* {renderGifos()} */}
-        {/* <LayoutContainer sectionIcon={content.icon} section={content.title} dataValue={gifos} noDataText={content.NoFavGifo}  noDataImg={content.NoFavImg} /> */}
-
-        {/* // render LayoutContainer component and re render it when the data state changes */}
-
+        {/* {data.length === 0 ? (
+        // <LayoutContainer
+        //   sectionIcon={content.icon}
+        //   section={content.title}
+        //   dataValue={gifos}
+        //   noDataText={content.NoFavGifo}
+        //   noDataImg={content.NoFavImg}
+        // />
+        <h1>Hola</h1>
+        ) : (
+          <LayoutContainer
+            sectionIcon={content.icon}
+            section={content.title}
+            dataValue={gifos}
+            noDataText={content.NoFavGifo}
+            noDataImg={content.NoFavImg}
+          />
+        )} */}
         <LayoutContainer
           sectionIcon={content.icon}
           section={content.title}
@@ -86,8 +66,9 @@ const Favorites = (): JSX.Element => {
           noDataText={content.NoFavGifo}
           noDataImg={content.NoFavImg}
         />
-
-        <div className="flex flex-col items-center justify-center py-10">{renderLoadMore()}</div>
+        <div className="flex flex-col items-center justify-center py-10">
+          {renderLoadMore(limit, setLimit, data)}
+        </div>
         <Trending />
       </Layout>
     </>
