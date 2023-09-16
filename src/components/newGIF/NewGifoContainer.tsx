@@ -30,6 +30,24 @@ const NewGifoContainer = () => {
   const chro = useRef<HTMLButtonElement>(null);
   const repeatSnap = useRef<HTMLDivElement>(null);
 
+  const stepsToFollow = () => {
+    if (step === 0) {
+      one.current?.classList.add('bg-indigo-600');
+      two.current?.classList.remove('bg-indigo-600');
+      three.current?.classList.remove('bg-indigo-600');
+    }
+    if (step === 1) {
+      one.current?.classList.remove('bg-indigo-600');
+      two.current?.classList.add('bg-indigo-600');
+      three.current?.classList.remove('bg-indigo-600');
+    }
+    if (step === 2) {
+      one.current?.classList.remove('bg-indigo-600');
+      two.current?.classList.remove('bg-indigo-600');
+      three.current?.classList.add('bg-indigo-600');
+    }
+  };
+
   const handleAllow = () => {
     setStep(1);
     setTimeout(() => {
@@ -222,11 +240,7 @@ const NewGifoContainer = () => {
                       title="Obtener enlace"
                       // onClick={() => blobDwnld(images.original.url, title)}
                     >
-                      <img
-                        src={linkIcon}
-                        alt="link"
-                        className="opacity-70 hover:opacity-100"
-                      />
+                      <img src={linkIcon} alt="link" className="opacity-70 hover:opacity-100" />
                     </button>
                   </div>
                   <div className="flex h-full w-full flex-col items-center justify-center">
@@ -244,24 +258,54 @@ const NewGifoContainer = () => {
         </div>
         <div className="bottomContainer col-start-5 col-end-8 row-start-5 row-end-5 ml-4 mr-12 flex flex-row items-center justify-between">
           <div className="steps flex justify-between gap-6">
-            <span
-              className="one w-7 rounded-full border-2 border-indigo-600 text-center text-indigo-600"
-              ref={one}
-            >
-              1
-            </span>
+            {step !== 1 && (
+              <span
+                className="one w-7 rounded-full border-2 border-indigo-600 text-center text-indigo-600"
+                ref={one}
+              >
+                1
+              </span>
+            )}
+            {step === 1 && (
+              <span
+                className="one w-7 rounded-full border-2 border-indigo-600 bg-indigo-600 text-center text-white"
+                ref={one}
+              >
+                1
+              </span>
+            )}
+            {( step <= 1 || step >= 5) && (
             <span
               className="two w-7 rounded-full border-2 border-indigo-600 text-center text-indigo-600"
               ref={two}
             >
               2
             </span>
-            <span
-              className="three w-7 rounded-full border-2 border-indigo-600 text-center text-indigo-600"
-              ref={three}
-            >
-              3
-            </span>
+            )}
+            {step >= 2 && step <= 4 && (
+              <span
+                className="one w-7 rounded-full border-2 border-indigo-600 bg-indigo-600 text-center text-white"
+                ref={two}
+              >
+                2
+              </span>
+            )}
+              {(step <=4 ) && (
+                <span
+                className="three w-7 rounded-full border-2 border-indigo-600 text-center text-indigo-600"
+                ref={three}
+              >
+                3
+              </span>
+              )}
+            {step >= 5 && (
+              <span
+                className="one w-7 rounded-full border-2 border-indigo-600 bg-indigo-600 text-center text-white"
+                ref={three}
+              >
+                3
+              </span>
+            )}
           </div>
           <div className="buttons">
             {step === 3 && (

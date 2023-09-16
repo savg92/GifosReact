@@ -166,7 +166,7 @@ export const Nav : React.FC<NavProps> = ({ className, }: NavProps) : JSX.Element
                 </label>
                 <input
                   type="checkbox"
-                  id="dark-mode-toggle"
+                  id="dark-mode-toggle-2"
                   onChange={handleToggle}
                   checked={localStorage.getItem('DarkMode') === 'true'}
                   className="invisible"
