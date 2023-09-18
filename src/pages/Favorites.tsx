@@ -18,38 +18,46 @@ const content = {
 const Favorites = (): JSX.Element => {
   const [data, setData] = useState<any[]>([]);
   const [limit, setLimit] = useState<number>(12);
-  const [gifos, setGifos] = useState<any[]>([]);
-  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+  const [gifos, setGifos] = useState<any>([]);
+  const localData = JSON.parse(localStorage.getItem('favorites') || '[]');
+
 
   useEffect(() => {
     const controller = new AbortController();
-    if (favorites.length !== 0) {
-      getMultipleGifos(favorites, controller.signal).then((result) => {
+    if (localData.length !== 0) {
+      getMultipleGifos(localData, controller.signal).then((result) => {
         setData(result.data);
       });
     }
     return () => {
       controller.abort();
     }
-  }, [favorites]);
+  }, [localData]);
 
   useEffect(() => {
     const gifos = data.slice(0, limit);
     setGifos(gifos);
   }, [data, limit]);
 
+  useEffect(() => {
+    if (localData.length === 0) {
+      setData([]);
+      setGifos([]);
+      setLimit(12);
+    }
+  }, [localData]);
+
   return (
     <>
       <Layout>
-        {/* {data.length === 0 ? (
-        // <LayoutContainer
-        //   sectionIcon={content.icon}
-        //   section={content.title}
-        //   dataValue={gifos}
-        //   noDataText={content.NoFavGifo}
-        //   noDataImg={content.NoFavImg}
-        // />
-        <h1>Hola</h1>
+        {localData.length === 0 ? (
+          <LayoutContainer
+            sectionIcon={content.icon}
+            section={content.title}
+            dataValue={gifos}
+            noDataText={content.NoFavGifo}
+            noDataImg={content.NoFavImg}
+          />
         ) : (
           <LayoutContainer
             sectionIcon={content.icon}
@@ -58,17 +66,8 @@ const Favorites = (): JSX.Element => {
             noDataText={content.NoFavGifo}
             noDataImg={content.NoFavImg}
           />
-        )} */}
-        <LayoutContainer
-          sectionIcon={content.icon}
-          section={content.title}
-          dataValue={gifos}
-          noDataText={content.NoFavGifo}
-          noDataImg={content.NoFavImg}
-        />
-        <div className="flex flex-col items-center justify-center py-10">
-          {renderLoadMore(limit, setLimit, data)}
-        </div>
+        )}
+        {renderLoadMore(limit, setLimit, data)}
         <Trending />
       </Layout>
     </>
