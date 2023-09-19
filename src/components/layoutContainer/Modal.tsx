@@ -31,7 +31,7 @@ const Modal = ({
 
   return (
     <div
-      className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
+      className="modal fixed inset-0 z-10 box-content flex w-full items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
       id="wrapper"
       onClick={handleClose}
     >
@@ -41,7 +41,7 @@ const Modal = ({
         </button>
         <div className="rounded bg-white p-2 text-black">
           {/* {children} */}
-          <div className="justify-center md:flex md:h-[700px] md:w-[900px] md:px-10 md:py-10">
+          <div className="justify-center md:flex md:h-[700px] md:w-[900px] md:px-10 md:py-10 w-64">
             <Swiper
               modules={[Navigation, Pagination, Mousewheel, Keyboard]}
               // spaceBetween={2}
@@ -52,14 +52,14 @@ const Modal = ({
               // mousewheel={true}
               keyboard={true}
               initialSlide={initialSlide}
-              // breakpoints={{
-              //   375: {
-              //     slidesPerView: 2,
-              //     spaceBetween: 10,
-              //     navigation: {
-              //       enabled: false,
-              //     },
-              //   },
+              breakpoints={{
+                375: {
+                  slidesPerView: 1,
+                  spaceBetween: 10,
+                  navigation: {
+                    enabled: false,
+                  },
+                },
               //   640: {
               //     slidesPerView: 3,
               //     spaceBetween: 75,
@@ -71,11 +71,14 @@ const Modal = ({
               //     slidesPerView: 2,
               //     spaceBetween: 10,
               //   },
-              //   1024: {
-              //     slidesPerView: 4,
-              //     spaceBetween: 5,
-              //   },
-              // }}
+                1024: {
+                  slidesPerView: 1,
+                  spaceBetween: 5,
+                  navigation: {
+                    enabled: true,
+                  },
+                },
+              }}
             >
               {modalData?.map((item, index) => (
                 <SwiperSlide key={index} className="flex w-full items-center justify-center">

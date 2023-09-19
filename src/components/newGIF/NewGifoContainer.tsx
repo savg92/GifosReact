@@ -3,7 +3,7 @@ import { createGifo } from '../../services/services';
 import Webcam from 'react-webcam';
 import AccessCamera from './AccessCamera';
 import StartGifProcess from './StartGifProcess';
-import  Stopwatch  from '../../handlers//stopWatch';
+import  Stopwatch  from '../../handlers/Stopwatch';
 
 import loader from '../../assets/loader.svg';
 import movie from '../../assets/pelicula.svg';

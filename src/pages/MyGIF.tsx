@@ -31,7 +31,7 @@ const MyGIF = () => {
     return () => {
       controller.abort();
     };
-  }, [localData]);
+  }, []);
   
   useEffect(() => {
     const gifos = data.slice(0, limit);

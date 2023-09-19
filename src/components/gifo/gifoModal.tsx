@@ -27,6 +27,8 @@ const gifoModal = ({ className, Id, images, title, username }: GifoProps) => {
         // className="h-auto w-full object-cover "
         // className="h-full max-h-96 w-full object-cover "
         className="max-h-[380px]"
+        // className="max-h-[380px] sm:mw-[100px]"
+        // className="sm:w-[100px]"
         src={images.original.webp}
         alt={title}
       />
