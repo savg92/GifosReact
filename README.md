@@ -53,9 +53,11 @@ npm run dev
 - [GIPHY](https://giphy.com/)
 
 ### License
-[MIT](https://choosealicense.com/licenses/mit/)
+- [MIT](https://choosealicense.com/licenses/mit/)
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+[]: # Path: README.md
 
 ### Gifos
 
@@ -113,4 +115,4 @@ npm run dev
 - [GIPHY](https://giphy.com/)
 
 ### Licencia
-[MIT](https://choosealicense.com/licenses/mit/)
+- [MIT](https://choosealicense.com/licenses/mit/)
